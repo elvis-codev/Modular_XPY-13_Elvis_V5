@@ -156,6 +156,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
             Route::delete('user-delete/{id}', 'user_destroy')->name('user-delete');
             Route::put('user-status/{id}', 'user_status')->name('user-status');
             Route::put('user-update/{id}', 'update')->name('user-update');
+            Route::post('assign-course-to-student', 'assignCourseToStudent')->name('assign-course-to-student');
 
             Route::get('seller-list', 'seller_list')->name('seller-list');
             Route::get('pending-seller', 'pending_seller')->name('pending-seller');
@@ -180,4 +181,11 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
 
 
 });
+
+
+
+
+
+
+
 

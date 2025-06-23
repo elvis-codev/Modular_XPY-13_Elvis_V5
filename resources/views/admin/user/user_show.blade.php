@@ -169,7 +169,7 @@
 
                                 <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" class="crancy-btn crancy-full-width mg-top-20 user_edit_btn"> <i class="fas fa-edit    "></i> {{ __('translate.Edit Profile') }}</a>
 
-
+                                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#assignCourseModal" class="crancy-btn crancy-full-width mg-top-20" style="background-color: #28a745; border-color: #28a745;"> <i class="fas fa-plus-circle"></i> Asignar Cursos</a>
 
                                 <a onclick="itemDeleteConfrimation({{ $user->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn crancy-full-width mg-top-20 user_delete_btn"> <i class="fas fa-trash    "></i> {{ __('translate.Delete Student') }}</a>
 
@@ -385,6 +385,58 @@
     </div>
 
 
+    {{-- Assign Course Modal --}}
+    <div class="modal fade" id="assignCourseModal" tabindex="-1" aria-labelledby="assignCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignCourseModalLabel">Asignar Curso al Estudiante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignCourseForm">
+                        @csrf
+                        <input type="hidden" name="student_id" value="{{ $user->id }}">
+                        
+                        <div class="crancy__item-form--group">
+                            <label class="crancy__item-label">Seleccionar Curso *</label>
+                            <select class="form-select crancy__item-input" name="course_id" id="courseSelect" required>
+                                <option value="">Seleccione un curso...</option>
+                                @php
+                                    $all_courses = \Modules\Course\App\Models\Course::with('translate')->get();
+                                @endphp
+                                @if($all_courses->count() > 0)
+                                    @foreach($all_courses as $course)
+                                        @if($course->translate && $course->translate->title)
+                                            <option value="{{ $course->id }}">
+                                                {{ $course->translate->title }} - {{ currency($course->offer_price ?: $course->regular_price) }}
+                                            </option>
+                                        @else
+                                            <option value="{{ $course->id }}">
+                                                Curso ID: {{ $course->id }} - {{ currency($course->offer_price ?: $course->regular_price) }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <option value="">No hay cursos disponibles</option>
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="crancy__item-form--group mg-top-form-20">
+                            <label class="crancy__item-label">Estudiante</label>
+                            <input class="crancy__item-input" type="text" value="{{ html_decode($user->name) }} ({{ $user->email }})" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="assignCourse()">Asignar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -436,6 +488,48 @@
                 },
                 error:function(err){}
             })
+        }
+
+        function assignCourse(){
+            var appMODE = "{{ env('APP_MODE') }}"
+            if(appMODE == 'DEMO'){
+                toastr.error('This Is Demo Version. You Can Not Change Anything');
+                return;
+            }
+
+            var courseId = $('#courseSelect').val();
+            var studentId = $('input[name="student_id"]').val();
+
+            if(!courseId){
+                toastr.error('Por favor seleccione un curso');
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                data: { 
+                    _token: '{{ csrf_token() }}',
+                    course_id: courseId,
+                    student_id: studentId
+                },
+                url: "{{ route('admin.assign-course-to-student') }}",
+                success: function(response){
+                    if(response.success){
+                        toastr.success(response.message);
+                        $('#assignCourseModal').modal('hide');
+                        // Recargar la página para mostrar el curso asignado
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr){
+                    var response = JSON.parse(xhr.responseText);
+                    toastr.error(response.message || 'Ocurrió un error al asignar el curso');
+                }
+            });
         }
 
     </script>

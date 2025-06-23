@@ -331,4 +331,61 @@ class UserController extends Controller
         ]);
 
     }
+
+    public function assignCourseToStudent(Request $request) {
+        $rules = [
+            'student_id' => 'required|exists:users,id',
+            'course_id' => 'required|exists:courses,id'
+        ];
+        
+        $customMessages = [
+            'student_id.required' => 'El ID del estudiante es requerido',
+            'student_id.exists' => 'El estudiante no existe',
+            'course_id.required' => 'El ID del curso es requerido',
+            'course_id.exists' => 'El curso no existe'
+        ];
+        
+        $this->validate($request, $rules, $customMessages);
+        
+        $student = User::findOrFail($request->student_id);
+        $course = Course::findOrFail($request->course_id);
+        
+        // Verificar si el estudiante ya está inscrito en este curso
+        $existingEnrollment = CourseEnrollmentList::whereHas('course_enrollment', function($query) use($student) {
+            $query->where('student_id', $student->id);
+        })->where('course_id', $course->id)->first();
+        
+        if($existingEnrollment) {
+            return response()->json([
+                'success' => false,
+                'message' => 'El estudiante ya está inscrito en este curso'
+            ], 400);
+        }
+        
+        // Crear nueva inscripción
+        $enrollment = new CourseEnrollment();
+        $enrollment->student_id = $student->id;
+        $enrollment->sub_total_amount = $course->offer_price ?: $course->regular_price;
+        $enrollment->coupon_amount = 0.00;
+        $enrollment->total_amount = $course->offer_price ?: $course->regular_price;
+        $enrollment->payment_method = 'admin_assignment';
+        $enrollment->payment_status = 'success';
+        $enrollment->transaction_id = 'admin_assign_' . time();
+        $enrollment->order_id = 'ADM' . time() . rand(100, 999);
+        $enrollment->order_status = 'success';
+        $enrollment->save();
+        
+        // Crear registro en la lista de inscripciones
+        $enrollmentList = new CourseEnrollmentList();
+        $enrollmentList->course_enrollment_id = $enrollment->id;
+        $enrollmentList->course_id = $course->id;
+        $enrollmentList->instructor_id = $course->user_id;
+        $enrollmentList->total_amount = $course->offer_price ?: $course->regular_price;
+        $enrollmentList->save();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Curso asignado exitosamente al estudiante'
+        ]);
+    }
 }

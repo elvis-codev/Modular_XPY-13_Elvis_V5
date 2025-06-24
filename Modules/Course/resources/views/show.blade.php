@@ -68,7 +68,7 @@
                     <div class="td_tab active" id="td_tab_1">
                         <h2 class="td_fs_36 td_mb_20">{{ __('translate.Courses Descriptions') }}</h2>
 
-                        {!! clean(html_decode($course->description)) !!}
+                        {!! clean(html_decode($course->description), 'iframe_allowed') !!}
 
                     </div>
                     <div class="td_tab" id="td_tab_2">

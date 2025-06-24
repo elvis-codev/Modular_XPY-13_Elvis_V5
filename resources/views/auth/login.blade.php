@@ -1,102 +1,172 @@
-@extends('layout_inner_page')
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+	<head>
+		<!-- Meta Tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-@section('title')
-    <title>{{ __('translate.Sign In') }}</title>
-@endsection
+		<!-- Site Title -->
+		<title>{{ __('translate.Sign In') }}</title>
 
-@section('front-content')
+		<!-- Fav Icon -->
+		<link rel="icon" href="{{ asset($general_setting->favicon) }}">
 
-@include('breadcrumb')
+        <!--  Stylesheet -->
+		<link rel="stylesheet" href="{{ asset('/backend/css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/slick.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/font-awesome-all.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/nice-select.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/reset.css') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/dev.css') }}">
+        <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
 
-<!-- Start Signin Section -->
-<section>
-    <div class="td_height_100 td_height_lg_50"></div>
-    <div class="container">
-        <div class="row td_gap_y_40">
-        <div class="col-lg-6">
-            <div class="td_sign_thumb">
-                <img src="{{ asset($general_setting->login_page_bg) }}" alt="" class="w-100 td_radius_10">
-            </div>
+	</head>
+	<body id="crancy-dark-light">
 
-        </div>
-        <div class="col-lg-6">
-            <div class="td_form_card td_style_1 td_radius_10 td_gray_bg_5">
-                <form class="td_form_card_in" method="POST" action="{{ route('student.store-login') }}">
-                    @csrf
-                    <h2 class="td_fs_36 td_mb_20">{{ __('translate.Sign In') }}</h2>
-                    <hr>
-                    <div class="td_height_30 td_height_lg_30"></div>
+		<div class="body-bg">
 
-                    <input type="email" class="td_form_field td_mb_30 td_medium td_white_bg" placeholder="{{ __('translate.Email') }} *" name="email" value="{{ old('email') }}">
-                    <input type="password" class="td_form_field td_mb_10 td_medium td_white_bg" placeholder="{{ __('translate.Password') }} *" name="password">
-                    <div class="td_form_card_text_2 td_mb_30">
-                        <div><a href="{{ route('student.forget-password') }}" class="td_semibold td_accent_color">{{ __('translate.Forgot Password?') }}</a></div>
-                        <div class="td_accent_color">
-                            <div class="td_custom_checkbox">
-                                <input type="checkbox" id="remember" name="remember">
-                                <label for="remember">{{ __('translate.Remember me') }}</label>
+			<section class="crancy-wc crancy-wc__full crancy-bg-cover">
+				<div class="crancy-wc__form">
+					<!-- Welcome Banner -->
+					<div class="crancy-wc__form--middle">
+                        <div class="crancy-wc__banner crancy-bg-cover">
+                            <div class="crancy-wc__banner--img w-100 h-100">
+                                <img src="{{ asset($general_setting->login_page_bg) }}" alt="#" class="w-100 h-100">
                             </div>
                         </div>
-                    </div>
+						<div class="crancy-wc__form-inner-flex">
+						<div class="crancy-wc__form-inner">
+							<div class="crancy-wc__logo">
+								<a href="{{ route('home') }}"><img src="{{ asset($general_setting->logo) }}" alt="#"></a>
+							</div>
 
-                    @if($general_setting->recaptcha_status==1)
-                        <div class="td_mb_10">
-                            <div class="g-recaptcha" data-sitekey="{{ $general_setting->recaptcha_site_key }}"></div>
-                        </div>
-                    @endif
+							<div class="crancy-wc__form-inside-df">
+							<div class="crancy-wc__form-inside">
+								<div class="crancy-wc__form-middle">
+									<div class="crancy-wc__form-top">
 
-                    <div class="td_form_card_bottom td_mb_25">
-                        <div class="w-100">
+										<div class="crancy-wc__heading pd-btm-20">
+											<h3 class="crancy-wc__form-title crancy-wc__form-title__one m-0">{{ __('translate.Login Here') }}</h3>
+											<p>{{ __('translate.Welcome to Educve Student Panel') }}</p>
+										</div>
+										<!-- Sign in Form -->
+										<form class="crancy-wc__form-main" action="{{ route('student.store-login') }}" method="post">
+											@csrf
+											<div class="row">
+												<div class="col-12">
+													<!-- Form Group -->
+													<div class="form-group">
+														<div class="form-group__input">
+															<input class="crancy-wc__form-input" type="email" name="email" placeholder="{{ __('translate.Email') }}" value="{{ old('email') }}">
+														</div>
+													</div>
+												</div>
+												<div class="col-12">
+													<!-- Form Group -->
+													<div class="form-group">
+														<div class="form-group__input">
+															<input class="crancy-wc__form-input" placeholder="{{ __('translate.Password') }}" id="password-field" type="password" name="password">
+															<span class="crancy-wc__toggle"><i class="fas fa-eye-slash" id="toggle-icon"></i></span>
+														</div>
+													</div>
+												</div>
+											</div>
 
-                            <button type="submit" class="td_btn td_style_1 td_radius_30 td_medium edc-auth-btn" >
-                  <span class="td_btn_in td_white_color td_accent_bg">
-                    <span>{{ __('translate.Sign In') }}</span>
-                    <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                      <path d="M15.157 11.4142C15.157 11.4142 16.0887 5.2748 15.157 4.34311C14.2253 3.41142 8.08594 4.34314 8.08594 4.34314" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                  </span>
-                            </button>
-                            <div>
-                                <p class="td_form_card_text td_fs_20 td_fs_sm_16 td_medium td_heading_color mb-0 text-center mt-3">{{ __('translate.Don’t Have an Account?') }} <a
-                                        href="{{ route('student.register') }}">{{ __('translate.Sign Up') }}</a></p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-3 justify-content-center align-items-center mt-4">
-                            <div class="edc-line-sperator"></div>
-                            <p class="td_fs_20 mb-0 td_medium ">{{ __('translate.or sign up with') }}</p>
-                            <div class="edc-line-sperator"></div>
-                        </div>
+											@if($general_setting->recaptcha_status==1)
+												<div class="form-group">
+													<div class="g-recaptcha" data-sitekey="{{ $general_setting->recaptcha_site_key }}"></div>
+												</div>
+											@endif
 
-                        <div class="td_form_social td_fs_20">
+											<!-- Form Group -->
+											<div class="form-group mg-top-30">
+												<div class="crancy-wc__button">
+													<button class="ntfmax-wc__btn" type="submit">{{ __('translate.Login Now') }}</button>
+												</div>
+											</div>
 
-                            @if ($general_setting->is_gmail == 1)
-                                <a href="{{ route('student.login-google') }}" class="td_center">
-                                    <i class="fa-brands fa-google"></i>
-                                </a>
-                            @endif
+											<div class="crancy-wc__form-bottom">
+												<p>¿No tienes una cuenta? <a href="{{ route('student.register') }}">Registrarse</a></p>
+											</div>
 
-                            @if ($general_setting->is_facebook == 1)
-                                <a href="{{ route('student.login-facebook') }}" class="td_center">
-                                    <i class="fa-brands fa-facebook-f"></i>
-                                </a>
-                            @endif
+										</form>
+										<!-- End Sign in Form -->
+										
+									</div>
 
-                        </div>
-                    </div>
+								</div>
+							</div>
+							</div>
 
-                </form>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="td_height_100 td_height_lg_50"></div>
-</section>
-<!-- End Signin Section -->
+						</div>
+						</div>
 
-@endsection
+					</div>
+					<!-- End Welcome Banner -->
+				</div>
+			</section>
 
-  @push('js_section')
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+		</div>
 
-    @endpush
+		<!--  Scripts -->
+		<script src="{{ asset('global/js/jquery-3.7.1.min.js') }}"></script>
+		<script src="{{ asset('backend/js/jquery-migrate.js') }}"></script>
+		<script src="{{ asset('backend/js/popper.min.js') }}"></script>
+		<script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('backend/js/nice-select.min.js') }}"></script>
+		<script src="{{ asset('backend/js/main.js') }}"></script>
+        <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+        <script>
+            (function($) {
+                "use strict"
+                $(document).ready(function () {
+
+					const togglePassword = document.querySelector('#toggle-icon');
+					const password = document.querySelector('#password-field');
+					
+					if (togglePassword && password) {
+						togglePassword.addEventListener('click', function (e) {
+							const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+							password.setAttribute('type', type);
+							this.classList.toggle('fa-eye');
+							this.classList.toggle('fa-eye-slash');
+						});
+					}
+
+					const session_notify_message = @json(Session::get('message'));
+					
+					if(session_notify_message != null){
+						const session_notify_type = @json(Session::get('alert-type', 'info'));
+						switch (session_notify_type) {
+							case 'info':
+								toastr.info(session_notify_message);
+								break;
+							case 'success':
+								toastr.success(session_notify_message);
+								break;
+							case 'warning':
+								toastr.warning(session_notify_message);
+								break;
+							case 'error':
+								toastr.error(session_notify_message);
+								break;
+						}
+					}
+
+					const validation_errors = @json($errors->all());
+					
+					if (validation_errors.length > 0) {
+						validation_errors.forEach(error => toastr.error(error));
+					}
+
+                });
+            })(jQuery);
+
+        </script>
+
+	</body>
+</html>

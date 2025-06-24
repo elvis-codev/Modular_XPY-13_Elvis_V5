@@ -156,7 +156,7 @@
                                                                         <h1 class="ed-crs-details-headline">{{ __('translate.What you will learn') }}</h1>
                                                                         <div class="ed-html-editor-elm">
 
-                                                                            {!! clean(html_decode($active_lesson->description)) !!}
+                                                                            {!! clean(html_decode($active_lesson->description), 'iframe_allowed') !!}
 
                                                                         </div>
                                                                     </div>

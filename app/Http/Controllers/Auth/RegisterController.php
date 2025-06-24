@@ -105,7 +105,7 @@ class RegisterController extends Controller
 
         $notify_message = trans('translate.Account created successful, a verification link has been send to your mail, please verify it');
         $notify_message = array('message' => $notify_message, 'alert-type' => 'success');
-        return redirect()->back()->with($notify_message);
+        return redirect()->route('student.login')->with($notify_message);
 
     }
 

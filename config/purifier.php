@@ -37,6 +37,14 @@ return [
             "HTML.SafeIframe"      => 'true',
             "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/)%",
         ],
+        "iframe_allowed" => [
+            "HTML.SafeIframe"      => 'true',
+            "URI.SafeIframeRegexp" => "%^(http://|https://|//)(www.youtube.com/embed/|player.vimeo.com/video/|drive.google.com/file/|docs.google.com/)%",
+            'HTML.Allowed'         => 'h1,h2,h3,h4,h5,h6,div,b,strong,i,em,u,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src],iframe[src|width|height|frameborder|allowfullscreen|style|name|mozallowfullscreen|webkitallowfullscreen]',
+            'CSS.AllowedProperties'=> 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align,width,height',
+            'AutoFormat.AutoParagraph' => true,
+            'AutoFormat.RemoveEmpty'   => false,
+        ],
         'custom_definition' => [
             'id'  => 'html5-definitions',
             'rev' => 1,
@@ -87,6 +95,10 @@ return [
             ],
             'attributes' => [
                 ['iframe', 'allowfullscreen', 'Bool'],
+                ['iframe', 'allow', 'Text'],
+                ['iframe', 'frameborder', 'Text'],
+                ['iframe', 'scrolling', 'Enum#yes,no,auto'],
+                ['iframe', 'name', 'Text'],
                 ['table', 'height', 'Text'],
                 ['td', 'border', 'Text'],
                 ['th', 'border', 'Text'],

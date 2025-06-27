@@ -13,6 +13,17 @@ class CourseModuleLesson extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'course_module_id',
+        'name',
+        'video_source',
+        'video_id',
+        'embed_url',
+        'video_duration',
+        'serial',
+        'description',
+        'is_public_lesson',
+        'status'
+    ];
 
 }

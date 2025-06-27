@@ -41,8 +41,18 @@ class CourseLessonController extends Controller
         $course_module_lesson = new CourseModuleLesson();
         $course_module_lesson->course_module_id = $course_module_id;
         $course_module_lesson->name = $request->name;
-        $course_module_lesson->video_source = $request->video_source;
-        $course_module_lesson->video_id = $request->video_id;
+        
+        // Handle content type
+        if ($request->content_type === 'link') {
+            $course_module_lesson->video_source = 'link'; // Set to 'link' instead of null
+            $course_module_lesson->video_id = null;
+            $course_module_lesson->embed_url = $request->embed_url;
+        } else {
+            $course_module_lesson->video_source = $request->video_source;
+            $course_module_lesson->video_id = $request->video_id;
+            $course_module_lesson->embed_url = null;
+        }
+        
         $course_module_lesson->video_duration = $request->video_duration;
         $course_module_lesson->serial = $request->serial;
         $course_module_lesson->description = $request->description;
@@ -62,8 +72,18 @@ class CourseLessonController extends Controller
         $course_module_lesson = CourseModuleLesson::where(['course_module_id' => $course_module_id, 'id' => $module_lesson_id])->firstOrFail();
 
         $course_module_lesson->name = $request->name;
-        $course_module_lesson->video_source = $request->video_source;
-        $course_module_lesson->video_id = $request->video_id;
+        
+        // Handle content type
+        if ($request->content_type === 'link') {
+            $course_module_lesson->video_source = 'link'; // Set to 'link' instead of null
+            $course_module_lesson->video_id = null;
+            $course_module_lesson->embed_url = $request->embed_url;
+        } else {
+            $course_module_lesson->video_source = $request->video_source;
+            $course_module_lesson->video_id = $request->video_id;
+            $course_module_lesson->embed_url = null;
+        }
+        
         $course_module_lesson->video_duration = $request->video_duration;
         $course_module_lesson->serial = $request->serial;
         $course_module_lesson->description = $request->description;

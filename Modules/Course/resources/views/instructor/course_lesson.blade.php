@@ -203,12 +203,12 @@
                     <div class="row">
 
 
-                        @if ($module_lesson->video_id)
+                        @if ($module_lesson->video_id || $module_lesson->embed_url)
                             <div class="col-md-12">
                                 <div class="crancy__item-form--group">
-                                    <label class="crancy__item-label">{{ __('translate.Video Preview') }} </label>
+                                    <label class="crancy__item-label">{{ $module_lesson->embed_url ? __('translate.Content Preview') : __('translate.Video Preview') }} </label>
 
-                                    <iframe width="500" height="345" src="{{ html_decode($module_lesson->video_id) }}">
+                                    <iframe width="500" height="345" src="{{ html_decode($module_lesson->embed_url ?? $module_lesson->video_id) }}">
                                     </iframe>
 
                                 </div>
@@ -216,6 +216,16 @@
                         @endif
 
                         <div class="col-md-12">
+                            <div class="crancy__item-form--group mg-top-form-20">
+                                <label class="crancy__item-label">{{ __('translate.Content Type') }} * </label>
+                                <select class="form-select crancy__item-input" name="content_type" id="contentType{{ $module_lesson->id }}" onchange="toggleContentFields({{ $module_lesson->id }})">
+                                    <option {{ ($module_lesson->video_source !== 'link' && !$module_lesson->embed_url) ? 'selected' : '' }} value="video">{{ __('translate.Video') }}</option>
+                                    <option {{ ($module_lesson->video_source === 'link' || $module_lesson->embed_url) ? 'selected' : '' }} value="link">{{ __('translate.Link') }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" id="videoSourceDiv{{ $module_lesson->id }}" style="{{ ($module_lesson->video_source === 'link' || $module_lesson->embed_url) ? 'display:none;' : '' }}">
                             <div class="crancy__item-form--group mg-top-form-20">
                                 <label class="crancy__item-label">{{ __('translate.Video Source') }} * </label>
                                 <select class="form-select crancy__item-input" name="video_source">
@@ -225,14 +235,22 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" id="videoLinkDiv{{ $module_lesson->id }}" style="{{ ($module_lesson->video_source === 'link' || $module_lesson->embed_url) ? 'display:none;' : '' }}">
                             <div class="crancy__item-form--group mg-top-form-20">
                                 <label class="crancy__item-label">{{ __('translate.Video Link') }} * </label>
                                 <input class="crancy__item-input" type="text" name="video_id" value="{{ html_decode($module_lesson->video_id) }}">
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-12" id="embedUrlDiv{{ $module_lesson->id }}" style="{{ ($module_lesson->video_source !== 'link' && !$module_lesson->embed_url) ? 'display:none;' : '' }}">
+                            <div class="crancy__item-form--group mg-top-form-20">
+                                <label class="crancy__item-label">{{ __('translate.Embed URL') }} * </label>
+                                <input class="crancy__item-input" type="text" name="embed_url" value="{{ html_decode($module_lesson->embed_url ?? '') }}" placeholder="e.g., https://docs.google.com/presentation/d/e/EXAMPLE/embed">
+                                <small class="form-text text-muted">{{ __('translate.Paste the embed URL for PDFs, PPTs, or other content') }}</small>
+                            </div>
+                        </div>
+
+                        <div class="col-12" id="videoDurationDiv{{ $module_lesson->id }}" style="{{ ($module_lesson->video_source === 'link' || $module_lesson->embed_url) ? 'display:none;' : '' }}">
                             <div class="crancy__item-form--group mg-top-form-20">
                                 <label class="crancy__item-label">{{ __('translate.Video Duration') }} ({{ __('translate.minute') }}) * </label>
                                 <input class="crancy__item-input" type="number" name="video_duration" value="{{ html_decode($module_lesson->video_duration) }}">
@@ -320,6 +338,16 @@
 
                     <div class="col-md-12">
                         <div class="crancy__item-form--group mg-top-form-20">
+                            <label class="crancy__item-label">{{ __('translate.Content Type') }} * </label>
+                            <select class="form-select crancy__item-input" name="content_type" id="contentTypeAdd" onchange="toggleContentFieldsAdd()">
+                                <option value="video">{{ __('translate.Video') }}</option>
+                                <option value="link">{{ __('translate.Link') }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" id="videoSourceDivAdd">
+                        <div class="crancy__item-form--group mg-top-form-20">
                             <label class="crancy__item-label">{{ __('translate.Video Source') }} * </label>
                             <select class="form-select crancy__item-input" name="video_source">
                                 <option {{ old('video_source') == 'youtube' ? 'selected' : '' }} value="youtube">{{ __('translate.Youtube') }}</option>
@@ -328,14 +356,22 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12" id="videoLinkDivAdd">
                         <div class="crancy__item-form--group mg-top-form-20">
                             <label class="crancy__item-label">{{ __('translate.Video Link') }} * </label>
                             <input class="crancy__item-input" type="text" name="video_id" value="{{ old('video_id') }}">
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12" id="embedUrlDivAdd" style="display:none;">
+                        <div class="crancy__item-form--group mg-top-form-20">
+                            <label class="crancy__item-label">{{ __('translate.Embed URL') }} * </label>
+                            <input class="crancy__item-input" type="text" name="embed_url" value="{{ old('embed_url') }}" placeholder="e.g., https://docs.google.com/presentation/d/e/EXAMPLE/embed">
+                            <small class="form-text text-muted">{{ __('translate.Paste the embed URL for PDFs, PPTs, or other content') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="col-12" id="videoDurationDivAdd">
                         <div class="crancy__item-form--group mg-top-form-20">
                             <label class="crancy__item-label">{{ __('translate.Video Duration') }} ({{ __('translate.minute') }}) * </label>
                             <input class="crancy__item-input" type="number" name="video_duration" value="{{ old('video_duration') }}">
@@ -435,6 +471,64 @@
         function itemDeleteConfrimation(course_module_id, module_lesson_id){
 
             $("#item_delect_confirmation").attr("action",'{{ url("instructor/destroy-course-lesson/") }}'+"/"+course_module_id + "/" + module_lesson_id)
+        }
+
+        // Toggle content fields for Edit modals
+        function toggleContentFields(lessonId) {
+            const contentType = document.getElementById('contentType' + lessonId).value;
+            const videoSourceDiv = document.getElementById('videoSourceDiv' + lessonId);
+            const videoLinkDiv = document.getElementById('videoLinkDiv' + lessonId);
+            const embedUrlDiv = document.getElementById('embedUrlDiv' + lessonId);
+            const videoDurationDiv = document.getElementById('videoDurationDiv' + lessonId);
+
+            if (contentType === 'video') {
+                videoSourceDiv.style.display = 'block';
+                videoLinkDiv.style.display = 'block';
+                embedUrlDiv.style.display = 'none';
+                videoDurationDiv.style.display = 'block';
+                
+                // Clear embed URL field
+                embedUrlDiv.querySelector('input').value = '';
+            } else {
+                videoSourceDiv.style.display = 'none';
+                videoLinkDiv.style.display = 'none';
+                embedUrlDiv.style.display = 'block';
+                videoDurationDiv.style.display = 'none';
+                
+                // Clear video fields
+                videoLinkDiv.querySelector('input').value = '';
+                // Set duration to 0 for links
+                videoDurationDiv.querySelector('input').value = '0';
+            }
+        }
+
+        // Toggle content fields for Add modal
+        function toggleContentFieldsAdd() {
+            const contentType = document.getElementById('contentTypeAdd').value;
+            const videoSourceDiv = document.getElementById('videoSourceDivAdd');
+            const videoLinkDiv = document.getElementById('videoLinkDivAdd');
+            const embedUrlDiv = document.getElementById('embedUrlDivAdd');
+            const videoDurationDiv = document.getElementById('videoDurationDivAdd');
+
+            if (contentType === 'video') {
+                videoSourceDiv.style.display = 'block';
+                videoLinkDiv.style.display = 'block';
+                embedUrlDiv.style.display = 'none';
+                videoDurationDiv.style.display = 'block';
+                
+                // Clear embed URL field
+                embedUrlDiv.querySelector('input').value = '';
+            } else {
+                videoSourceDiv.style.display = 'none';
+                videoLinkDiv.style.display = 'none';
+                embedUrlDiv.style.display = 'block';
+                videoDurationDiv.style.display = 'none';
+                
+                // Clear video fields
+                videoLinkDiv.querySelector('input').value = '';
+                // Set duration to 0 for links
+                videoDurationDiv.querySelector('input').value = '0';
+            }
         }
     </script>
 @endpush

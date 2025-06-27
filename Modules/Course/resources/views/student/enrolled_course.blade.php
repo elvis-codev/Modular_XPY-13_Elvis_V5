@@ -27,16 +27,21 @@
                                                     <div class="w-100">
                                                         <div class="ed-watch-video-player mb-lg-4 mb-2">
                                                             @if ($active_lesson)
+                                                                @php
+                                                                    // Determine the source URL based on content type
+                                                                    $source_url = $active_lesson->embed_url ?: $active_lesson->video_id;
+                                                                    $content_title = $active_lesson->embed_url ? 'Content Embed' : 'YouTube video player';
+                                                                @endphp
                                                                 <iframe class="ed-video-player_iframe"
-                                                                src="{{ html_decode($active_lesson?->video_id) }}"
-                                                                title="YouTube video player" frameborder="0"
+                                                                src="{{ $source_url }}"
+                                                                title="{{ $content_title }}" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                                 referrerpolicy="strict-origin-when-cross-origin"
                                                                 allowfullscreen></iframe>
                                                             @else
                                                                 <iframe class="ed-video-player_iframe"
                                                                 src=""
-                                                                title="YouTube video player" frameborder="0"
+                                                                title="Content Player" frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                                 referrerpolicy="strict-origin-when-cross-origin"
                                                                 allowfullscreen></iframe>

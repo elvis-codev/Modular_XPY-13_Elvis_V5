@@ -136,6 +136,16 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="crancy__item-form--group mg-top-form-20">
+                                                    <label class="crancy__item-label">{{ __('translate.Content Type') }} * </label>
+                                                    <select class="form-select crancy__item-input" name="content_type" id="edit_content_type" onchange="toggleContentFieldsInline()">
+                                                        <option value="video">{{ __('translate.Video') }}</option>
+                                                        <option value="link">{{ __('translate.Link') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" id="edit_video_source_div">
+                                                <div class="crancy__item-form--group mg-top-form-20">
                                                     <label class="crancy__item-label">{{ __('translate.Video Source') }} * </label>
                                                     <select class="form-select crancy__item-input" name="video_source" id="edit_video_source">
                                                         <option value="youtube">{{ __('translate.Youtube') }}</option>
@@ -144,14 +154,22 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
+                                            <div class="col-12" id="edit_video_link_div">
                                                 <div class="crancy__item-form--group mg-top-form-20">
                                                     <label class="crancy__item-label">{{ __('translate.Video Link') }} * </label>
                                                     <input class="crancy__item-input" type="text" name="video_id" id="edit_video_id">
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
+                                            <div class="col-12" id="edit_embed_url_div" style="display:none;">
+                                                <div class="crancy__item-form--group mg-top-form-20">
+                                                    <label class="crancy__item-label">{{ __('translate.Embed URL') }} * </label>
+                                                    <input class="crancy__item-input" type="text" name="embed_url" id="edit_embed_url" placeholder="e.g., https://docs.google.com/presentation/d/e/EXAMPLE/embed">
+                                                    <small class="form-text text-muted">{{ __('translate.Paste the embed URL for PDFs, PPTs, or other content') }}</small>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12" id="edit_video_duration_div">
                                                 <div class="crancy__item-form--group mg-top-form-20">
                                                     <label class="crancy__item-label">{{ __('translate.Video Duration') }} ({{ __('translate.minute') }}) * </label>
                                                     <input class="crancy__item-input" type="number" name="video_duration" id="edit_video_duration">
@@ -295,6 +313,16 @@
 
                     <div class="col-md-12">
                         <div class="crancy__item-form--group mg-top-form-20">
+                            <label class="crancy__item-label">{{ __('translate.Content Type') }} * </label>
+                            <select class="form-select crancy__item-input" name="content_type" id="add_content_type" onchange="toggleContentFieldsAdd()">
+                                <option value="video">{{ __('translate.Video') }}</option>
+                                <option value="link">{{ __('translate.Link') }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" id="add_video_source_div">
+                        <div class="crancy__item-form--group mg-top-form-20">
                             <label class="crancy__item-label">{{ __('translate.Video Source') }} * </label>
                             <select class="form-select crancy__item-input" name="video_source">
                                 <option {{ old('video_source') == 'youtube' ? 'selected' : '' }} value="youtube">{{ __('translate.Youtube') }}</option>
@@ -303,14 +331,22 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12" id="add_video_link_div">
                         <div class="crancy__item-form--group mg-top-form-20">
                             <label class="crancy__item-label">{{ __('translate.Video Link') }} * </label>
                             <input class="crancy__item-input" type="text" name="video_id" value="{{ old('video_id') }}">
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12" id="add_embed_url_div" style="display:none;">
+                        <div class="crancy__item-form--group mg-top-form-20">
+                            <label class="crancy__item-label">{{ __('translate.Embed URL') }} * </label>
+                            <input class="crancy__item-input" type="text" name="embed_url" value="{{ old('embed_url') }}" placeholder="e.g., https://docs.google.com/presentation/d/e/EXAMPLE/embed">
+                            <small class="form-text text-muted">{{ __('translate.Paste the embed URL for PDFs, PPTs, or other content') }}</small>
+                        </div>
+                    </div>
+
+                    <div class="col-12" id="add_video_duration_div">
                         <div class="crancy__item-form--group mg-top-form-20">
                             <label class="crancy__item-label">{{ __('translate.Video Duration') }} ({{ __('translate.minute') }}) * </label>
                             <input class="crancy__item-input" type="number" name="video_duration" value="{{ old('video_duration') }}">
@@ -551,6 +587,7 @@
                     course_module_id: {{ $lesson->course_module_id }},
                     video_source: '{{ $lesson->video_source }}',
                     video_id: '{{ addslashes($lesson->video_id) }}',
+                    embed_url: '{{ addslashes($lesson->embed_url ?? '') }}',
                     video_duration: {{ $lesson->video_duration ?? 0 }},
                     name: '{{ addslashes($lesson->name) }}',
                     serial: {{ $lesson->serial ?? 0 }},
@@ -579,11 +616,21 @@
                 // Populate form fields
                 $('#edit_video_source').val(lesson.video_source);
                 $('#edit_video_id').val(lesson.video_id);
+                $('#edit_embed_url').val(lesson.embed_url);
                 $('#edit_video_duration').val(lesson.video_duration);
                 $('#edit_name').val(lesson.name);
                 $('#edit_serial').val(lesson.serial);
                 $('#edit_is_public_lesson').prop('checked', lesson.is_public_lesson === 'enable');
                 $('#edit_status').prop('checked', lesson.status === 'enable');
+                
+                // Set content type and toggle fields
+                if (lesson.embed_url) {
+                    $('#edit_content_type').val('link');
+                    toggleContentFieldsInline();
+                } else {
+                    $('#edit_content_type').val('video');
+                    toggleContentFieldsInline();
+                }
                 
                 // Set form action
                 $('#editLessonForm').attr('action', '{{ url("admin/update-course-lesson") }}/' + lesson.course_module_id + '/' + lesson.id);
@@ -695,6 +742,64 @@
         function itemDeleteConfrimation(course_module_id, module_lesson_id){
 
             $("#item_delect_confirmation").attr("action",'{{ url("admin/destroy-course-lesson/") }}'+"/"+course_module_id + "/" + module_lesson_id)
+        }
+
+        // Toggle content fields for inline edit form
+        function toggleContentFieldsInline() {
+            const contentType = document.getElementById('edit_content_type').value;
+            const videoSourceDiv = document.getElementById('edit_video_source_div');
+            const videoLinkDiv = document.getElementById('edit_video_link_div');
+            const embedUrlDiv = document.getElementById('edit_embed_url_div');
+            const videoDurationDiv = document.getElementById('edit_video_duration_div');
+
+            if (contentType === 'video') {
+                videoSourceDiv.style.display = 'block';
+                videoLinkDiv.style.display = 'block';
+                embedUrlDiv.style.display = 'none';
+                videoDurationDiv.style.display = 'block';
+                
+                // Clear embed URL field
+                document.getElementById('edit_embed_url').value = '';
+            } else {
+                videoSourceDiv.style.display = 'none';
+                videoLinkDiv.style.display = 'none';
+                embedUrlDiv.style.display = 'block';
+                videoDurationDiv.style.display = 'none';
+                
+                // Clear video fields
+                document.getElementById('edit_video_id').value = '';
+                // Set duration to 0 for links
+                document.getElementById('edit_video_duration').value = '0';
+            }
+        }
+
+        // Toggle content fields for Add modal
+        function toggleContentFieldsAdd() {
+            const contentType = document.getElementById('add_content_type').value;
+            const videoSourceDiv = document.getElementById('add_video_source_div');
+            const videoLinkDiv = document.getElementById('add_video_link_div');
+            const embedUrlDiv = document.getElementById('add_embed_url_div');
+            const videoDurationDiv = document.getElementById('add_video_duration_div');
+
+            if (contentType === 'video') {
+                videoSourceDiv.style.display = 'block';
+                videoLinkDiv.style.display = 'block';
+                embedUrlDiv.style.display = 'none';
+                videoDurationDiv.style.display = 'block';
+                
+                // Clear embed URL field
+                embedUrlDiv.querySelector('input').value = '';
+            } else {
+                videoSourceDiv.style.display = 'none';
+                videoLinkDiv.style.display = 'none';
+                embedUrlDiv.style.display = 'block';
+                videoDurationDiv.style.display = 'none';
+                
+                // Clear video fields
+                videoLinkDiv.querySelector('input').value = '';
+                // Set duration to 0 for links
+                videoDurationDiv.querySelector('input').value = '0';
+            }
         }
     </script>
 @endpush

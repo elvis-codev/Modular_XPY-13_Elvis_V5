@@ -10,7 +10,7 @@
   <link rel="shortcut icon" href="{{ asset($general_setting->favicon) }}" type="image/x-icon">
   <!-- Site Title -->
 
-  <title>{{ env('APP_NAME') }} || {{ __('translate.404') }}</title>
+  <title>{{ env('APP_NAME') }} || {{ __('404') }}</title>
 
   <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/assets/css/fontawesome.min.css') }}">
@@ -36,14 +36,14 @@
               <img src="{{ asset($general_setting->error_image) }}" alt="thumb">
             </div>
             <div class="courses_not_found_text">
-              <h3>{{ __('translate.Oops! Page not found') }}</h3>
+              <h3>{{ __('Oops! Page not found') }}</h3>
               <p>
-                {{ __('translate.Oops! it could be you or us, there is no page here. It might have been moved or deleted.') }}
+                {{ __('Oops! it could be you or us, there is no page here. It might have been moved or deleted.') }}
               </p>
 
               <a href="{{ route('home') }}" class="td_btn td_style_1 td_radius_30 td_medium td_with_shadow">
                 <span class="td_btn_in td_white_color td_accent_bg">
-                  <span>{{ __('translate.Back To Home') }}</span>
+                  <span>{{ __('Back To Home') }}</span>
                   <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round"></path>

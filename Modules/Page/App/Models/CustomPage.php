@@ -29,11 +29,23 @@ class CustomPage extends Model
     }
 
     public function getPageNameAttribute(){
-        return $this->front_translate?->page_name;
+        if($this->front_translate && $this->front_translate->page_name){
+            return $this->front_translate->page_name;
+        }elseif($this->translate && $this->translate->page_name){
+            return $this->translate->page_name;
+        }else{
+            return 'Sin nombre de página';
+        }
     }
 
     public function getDescriptionAttribute(){
-        return $this->front_translate?->description;
+        if($this->front_translate && $this->front_translate->description){
+            return $this->front_translate->description;
+        }elseif($this->translate && $this->translate->description){
+            return $this->translate->description;
+        }else{
+            return 'Sin descripción';
+        }
     }
 
 

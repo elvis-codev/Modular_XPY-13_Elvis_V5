@@ -1032,5 +1032,6 @@
   'School ID is required' => 'El ID del colegio es requerido',
   'School not found' => 'Colegio no encontrado',
   'Cannot assign student to an inactive school' => 'No se puede asignar estudiante a un colegio inactivo',
+  'Calendar' => 'Calendario',
 );
  ?>

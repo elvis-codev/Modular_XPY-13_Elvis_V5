@@ -450,6 +450,12 @@ class HomeController extends Controller
 
         $request_lang = Language::where('lang_code', $request->lang_code)->first();
 
+        if(!$request_lang){
+            $notify_message= trans('translate.Requested language does not exist');
+            $notify_message=array('message'=>$notify_message,'alert-type'=>'error');
+            return redirect()->back()->with($notify_message);
+        }
+
         Session::put('front_lang', $request->lang_code);
         Session::put('front_lang_name', $request_lang->lang_name);
         Session::put('lang_dir', $request_lang->lang_direction);

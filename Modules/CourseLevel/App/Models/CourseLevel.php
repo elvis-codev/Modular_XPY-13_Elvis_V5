@@ -31,12 +31,13 @@ class CourseLevel extends Model
     }
 
     public function getNameAttribute(){
-        if($this->front_translate){
-            return $this->front_translate?->name;
+        if($this->front_translate && $this->front_translate->name){
+            return $this->front_translate->name;
+        }elseif($this->translate && $this->translate->name){
+            return $this->translate->name;
         }else{
-            return $this->translate?->name;
+            return 'Sin nombre';
         }
-
     }
 
     public function courses(){

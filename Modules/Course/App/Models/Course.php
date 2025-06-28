@@ -53,28 +53,32 @@ class Course extends Model
     }
 
     public function getTitleAttribute(){
-        if($this->front_translate){
-            return $this->front_translate?->title;
+        if($this->front_translate && $this->front_translate->title){
+            return $this->front_translate->title;
+        }elseif($this->translate && $this->translate->title){
+            return $this->translate->title;
         }else{
-            return $this->translate?->title;
+            return 'Sin título';
         }
-
     }
 
     public function getShortDescriptionAttribute(){
-        if($this->front_translate){
-            return $this->front_translate?->short_description;
+        if($this->front_translate && $this->front_translate->short_description){
+            return $this->front_translate->short_description;
+        }elseif($this->translate && $this->translate->short_description){
+            return $this->translate->short_description;
         }else{
-            return $this->translate?->short_description;
+            return 'Sin descripción corta';
         }
-
     }
 
     public function getDescriptionAttribute(){
-        if($this->front_translate){
-            return $this->front_translate?->description;
+        if($this->front_translate && $this->front_translate->description){
+            return $this->front_translate->description;
+        }elseif($this->translate && $this->translate->description){
+            return $this->translate->description;
         }else{
-            return $this->translate?->description;
+            return 'Sin descripción';
         }
     }
 

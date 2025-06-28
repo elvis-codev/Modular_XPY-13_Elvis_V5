@@ -64,7 +64,7 @@
             </div>
             <a href="{{ route('contact-us') }}" class="td_btn td_style_1 td_radius_30 td_medium td_with_shadow">
               <span class="td_btn_in td_white_color td_accent_bg">
-                <span>{{ __('translate.Contact Us') }}</span>
+                <span>{{ __('Contact Us') }}</span>
                 <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round"></path>
@@ -126,7 +126,7 @@
             <div class="td_btn_box_in">
               <a href="{{ getTranslatedValue($our_program, 'all_program_link') }}" target="_blank" class="td_btn td_style_1 td_radius_30 td_medium td_fs_18">
                 <span class="td_btn_in td_heading_color td_white_bg">
-                  <span>{{ __('translate.View All Program') }}</span>
+                  <span>{{ __('View All Program') }}</span>
                 </span>
               </a>
             </div>
@@ -320,15 +320,15 @@
     <div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.25s">
       <div class="td_contact_box td_style_1 td_accent_bg td_radius_10">
         <div class="td_contact_box_left">
-          <p class="td_fs_18 td_light td_white_color td_mb_4">{{ __('translate.Get In Touch') }}:</p>
+          <p class="td_fs_18 td_light td_white_color td_mb_4">{{ __('Get In Touch') }}:</p>
           <h3 class="td_fs_36 mb-0 td_white_color"><a href="mailto:{{ getTranslatedValue($about_video, 'email') }}">{{ getTranslatedValue($about_video, 'email') }}</a></h3>
         </div>
         <div
           class="td_contact_box_or td_fs_24 td_medium td_white_bg td_white_bg td_center rounded-circle td_accent_color">
-          {{ __('translate.or') }}
+          {{ __('or') }}
         </div>
         <div class="td_contact_box_right">
-          <p class="td_fs_18 td_light td_white_color td_mb_4">{{ __('translate.Get In Touch') }}:</p>
+          <p class="td_fs_18 td_light td_white_color td_mb_4">{{ __('Get In Touch') }}:</p>
           <h3 class="td_fs_36 mb-0 td_white_color"><a href="tel:{{ getTranslatedValue($about_video, 'phone') }}">{{ getTranslatedValue($about_video, 'phone') }}</a></h3>
         </div>
       </div>
@@ -342,8 +342,8 @@
     <div class="container">
       <div class="td_section_heading td_style_1 text-center wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s">
         <p class="td_section_subtitle_up td_fs_18 td_semibold td_spacing_1 td_mb_10 text-uppercase td_accent_color">
-          {{ __('translate.BLOG & ARTICLES') }}</p>
-        <h2 class="td_section_title td_fs_48 mb-0">{{ __('translate.Take A Look At The Latest') }} <br>{{ __('translate.Articles') }}</h2>
+          {{ __('BLOG & ARTICLES') }}</p>
+        <h2 class="td_section_title td_fs_48 mb-0">{{ __('Take A Look At The Latest') }} <br>{{ __('Articles') }}</h2>
       </div>
       <div class="td_height_50 td_height_lg_50"></div>
       <div class="row td_gap_y_30">
@@ -372,7 +372,7 @@
                 <p class="td_post_subtitle td_mb_24 td_heading_color td_opacity_7">{{ $blog?->short_description }}</p>
                 <a href="{{ route('blog', $blog->slug) }}" class="td_btn td_style_1 td_type_3 td_radius_30 td_medium">
                   <span class="td_btn_in td_accent_color">
-                    <span>{{ __('translate.Read More') }}</span>
+                    <span>{{ __('Read More') }}</span>
                   </span>
                 </a>
               </div>

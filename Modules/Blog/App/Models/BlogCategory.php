@@ -5,6 +5,7 @@ namespace Modules\Blog\App\Models;
 use Modules\Blog\App\Models\Blog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Blog\App\Models\BlogCategoryTranslation;
 use Modules\Blog\Database\factories\BlogCategoryFactory;
 
 class BlogCategory extends Model
@@ -30,7 +31,13 @@ class BlogCategory extends Model
 
 
     public function getNameAttribute(){
-        return $this->front_translate?->name;
+        if($this->front_translate && $this->front_translate->name){
+            return $this->front_translate->name;
+        }elseif($this->translate && $this->translate->name){
+            return $this->translate->name;
+        }else{
+            return 'Sin nombre';
+        }
     }
 
     public function blogs(){

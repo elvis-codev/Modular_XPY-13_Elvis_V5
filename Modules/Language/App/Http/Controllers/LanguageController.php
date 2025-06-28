@@ -233,16 +233,19 @@ class LanguageController extends Controller
 
     public function theme_language(Request $request){
 
-        if(!File::exists('lang/'.$request->lang_code.'/translate.php')){
+        $absolutePath = base_path('lang/'.$request->lang_code.'/translate.php');
+
+        if(!File::exists($absolutePath)){
             $notify_message = trans('translate.Requested language does not exist');
             $notify_message = array('message' => $notify_message, 'alert-type' => 'error');
             return redirect()->route('admin.language.index')->with($notify_message);
         }
 
-        $data = include('lang/'.$request->lang_code.'/translate.php');
+        $data = include($absolutePath);
 
         return view('language::theme_language', [
-            'data' => $data
+            'data' => $data,
+            'lang_code' => $request->lang_code
         ]);
 
 
@@ -252,7 +255,9 @@ class LanguageController extends Controller
     public function update_theme_language (Request $request){
 
 
-        if(!File::exists('lang/'.$request->lang_code.'/translate.php')){
+        $absolutePath = base_path('lang/'.$request->lang_code.'/translate.php');
+
+        if(!File::exists($absolutePath)){
             $notify_message = trans('translate.Requested language does not exist');
             $notify_message = array('message' => $notify_message, 'alert-type' => 'error');
             return redirect()->route('admin.language.index')->with($notify_message);
@@ -263,9 +268,9 @@ class LanguageController extends Controller
             $dataArray[$index] = $value;
         }
 
-        file_put_contents('lang/'.$request->lang_code.'/translate.php', "");
+        file_put_contents($absolutePath, "");
         $dataArray = var_export($dataArray, true);
-        file_put_contents('lang/'.$request->lang_code.'/translate.php', "<?php\n return {$dataArray};\n ?>");
+        file_put_contents($absolutePath, "<?php\n return {$dataArray};\n ?>");
 
         $notify_message = trans('translate.Updated successfully');
         $notify_message = array('message' => $notify_message, 'alert-type' => 'success');

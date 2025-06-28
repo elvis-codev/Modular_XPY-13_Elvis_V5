@@ -35,7 +35,7 @@
             <div class="td_blog_details_head_meta">
               <div class="td_blog_details_avatar">
                 <img src="{{ asset($blog?->author?->image) }}" alt=""/>
-                <p class="mb-0 td_heading_color td_bold"><span class="td_normal td_opacity_5">{{ __('translate.By') }}</span> {{ $blog?->author?->name }}
+                <p class="mb-0 td_heading_color td_bold"><span class="td_normal td_opacity_5">{{ __('By') }}</span> {{ $blog?->author?->name }}
                 </p>
               </div>
               <ul class="td_blog_details_head_meta_list td_mp_0 td_heading_color">
@@ -57,7 +57,7 @@
                     </button>
 
                   </div>
-                  {{ $blog->total_comment }} {{ __('translate.Comment') }}
+                  {{ $blog->total_comment }} {{ __('Comment') }}
                 </li>
 
                 <li>
@@ -67,7 +67,7 @@
                       <svg width="18" height="14" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3ZM12.0003 19C16.2359 19 19.8603 16.052 20.7777 12C19.8603 7.94803 16.2359 5 12.0003 5C7.7646 5 4.14022 7.94803 3.22278 12C4.14022 16.052 7.7646 19 12.0003 19ZM12.0003 16.5C9.51498 16.5 7.50026 14.4853 7.50026 12C7.50026 9.51472 9.51498 7.5 12.0003 7.5C14.4855 7.5 16.5003 9.51472 16.5003 12C16.5003 14.4853 14.4855 16.5 12.0003 16.5ZM12.0003 14.5C13.381 14.5 14.5003 13.3807 14.5003 12C14.5003 10.6193 13.381 9.5 12.0003 9.5C10.6196 9.5 9.50026 10.6193 9.50026 12C9.50026 13.3807 10.6196 14.5 12.0003 14.5Z"></path></svg>
                     </a>
                   </div>
-                  {{ $blog->views }} {{ __('translate.views') }}
+                  {{ $blog->views }} {{ __('views') }}
                 </li>
               </ul>
             </div>
@@ -81,7 +81,7 @@
           <div class="td_height_50 td_height_lg_40"></div>
           <div class="td_post_share">
             <div class="td_categories">
-              <h4 class="mb-0 td_fs_18">{{ __('translate.Tags') }}:</h4>
+              <h4 class="mb-0 td_fs_18">{{ __('Tags') }}:</h4>
               @if ($blog->tags)
                   @foreach (json_decode($blog->tags) as $blog_tag)
                   <a href="javascript:;" class="td_category">#{{ $blog_tag->value }}</a>
@@ -108,7 +108,7 @@
             <div class="td_author_card_in">
               <img src="{{ asset($blog?->author?->image) }}" alt="" class="td_author_card_thumb">
               <div class="td_author_card_right">
-                <p class="td_medium td_accent_color td_mb_10">{{ __('translate.Author') }}</p>
+                <p class="td_medium td_accent_color td_mb_10">{{ __('Author') }}</p>
                 <h3 class="td_fs_20 td_semibold td_mb_10">{{ $blog?->author?->name }}</h3>
                 <p class="mb-0">{{ $blog?->author?->about_me }}</p>
               </div>
@@ -116,7 +116,7 @@
           </div>
           <div class="td_height_40 td_height_lg_40"></div>
           <div id="comments" class="comments-area">
-            <h2 class="comments-title td_fs_20 td_semibold">{{ $blog->total_comment }} {{ __('translate.Comments') }}</h2>
+            <h2 class="comments-title td_fs_20 td_semibold">{{ $blog->total_comment }} {{ __('Comments') }}</h2>
             <ol class="comment-list">
 
               @foreach ($blog_comments as $blog_comment)
@@ -138,22 +138,22 @@
           </div>
           <div class="td_height_60 td_height_lg_40"></div>
           <div class="td_comment_wrap">
-            <h2 class="td_fs_24 td_semibold td_mb_10">{{ __('translate.Post a comment') }}</h2>
-            <p class="td_mb_16 td_heading_color">{{ __('translate.Your email address will not be published. Required fields are marked') }} *
+            <h2 class="td_fs_24 td_semibold td_mb_10">{{ __('Post a comment') }}</h2>
+            <p class="td_mb_16 td_heading_color">{{ __('Your email address will not be published. Required fields are marked') }} *
             </p>
             <form class="row td_gap_y_20" action="{{ route('store-blog-comment', $blog->id) }}" method="POST">
               @csrf
               <div class="col-lg-12">
-                <textarea cols="30" rows="5" class="td_form_field" placeholder="{{ __('translate.Write Your Comment') }}*" name="comment">{{ old('comment') }}</textarea>
+                <textarea cols="30" rows="5" class="td_form_field" placeholder="{{ __('Write Your Comment') }}*" name="comment">{{ old('comment') }}</textarea>
               </div>
               <div class="col-lg-4">
-                <input type="text" class="td_form_field" placeholder="{{ __('translate.Name') }}*" name="name" value="{{ old('name') }}">
+                <input type="text" class="td_form_field" placeholder="{{ __('Name') }}*" name="name" value="{{ old('name') }}">
               </div>
               <div class="col-lg-4">
-                <input type="email" class="td_form_field" placeholder="{{ __('translate.Email') }}*" name="email" value="{{ old('email') }}">
+                <input type="email" class="td_form_field" placeholder="{{ __('Email') }}*" name="email" value="{{ old('email') }}">
               </div>
               <div class="col-lg-4">
-                <input type="text" class="td_form_field" placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
+                <input type="text" class="td_form_field" placeholder="{{ __('Phone') }}" name="phone" value="{{ old('phone') }}">
               </div>
 
               @if($general_setting->recaptcha_status==1)
@@ -165,7 +165,7 @@
               <div class="col-lg-12">
                 <button class="td_btn td_style_1 td_radius_30 td_medium" type="submit">
                   <span class="td_btn_in td_white_color td_accent_bg">
-                    <span>{{ __('translate.Post Comment') }}</span>
+                    <span>{{ __('Post Comment') }}</span>
                     <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor" stroke-width="1.5"
                         stroke-linecap="round" stroke-linejoin="round"></path>
@@ -184,16 +184,16 @@
         <div class="col-lg-4">
           <div class="td_left_sidebar">
             <div class="td_sidebar_widget">
-              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('translate.Search Here') }}</h3>
+              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('Search Here') }}</h3>
               <form action="{{ route('blogs') }}" class="td_sidebar_search">
-                <input type="text" placeholder="{{ __('translate.Keywords') }}" name="search" class="td_sidebar_search_input">
+                <input type="text" placeholder="{{ __('Keywords') }}" name="search" class="td_sidebar_search_input">
                 <button type="submit" class="td_sidebar_search_btn td_center">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </form>
             </div>
             <div class="td_sidebar_widget">
-              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('translate.Recent Post') }}</h3>
+              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('Recent Post') }}</h3>
               <ul class="td_recent_post_list td_mp_0">
                 @foreach ($latest_blogs as $latest_blog)
                   <li>
@@ -217,7 +217,7 @@
               </ul>
             </div>
             <div class="td_sidebar_widget">
-              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('translate.Popular Category') }}</h3>
+              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('Popular Category') }}</h3>
               <ul class="td_sidebar_widget_list">
                 @foreach ($blog_categories as $blog_category)
                   <li class="cat-item">
@@ -230,7 +230,7 @@
               </ul>
             </div>
             <div class="td_sidebar_widget">
-              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('translate.Tags') }}</h3>
+              <h3 class="td_sidebar_widget_title td_fs_20 td_mb_30">{{ __('Tags') }}</h3>
               <div class="tagcloud">
                 @foreach ($tags_array as $tag_item)
                   <a href="{{ route('blogs', ['search' => $tag_item]) }}" class="tag-cloud-link">{{ $tag_item }}</a>

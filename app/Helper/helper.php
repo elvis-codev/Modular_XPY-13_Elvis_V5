@@ -9,7 +9,7 @@ function admin_lang(){
 }
 
 function front_lang(){
-    return Session::get('front_lang');
+    return Session::get('front_lang') ?? 'en';
 }
 
 

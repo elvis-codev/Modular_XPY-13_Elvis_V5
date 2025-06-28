@@ -28,7 +28,13 @@ class Category extends Model
 
     public function getNameAttribute()
     {
-        return $this->front_translate->name;
+        if($this->front_translate && $this->front_translate->name){
+            return $this->front_translate->name;
+        }elseif($this->translate && $this->translate->name){
+            return $this->translate->name;
+        }else{
+            return 'Sin nombre';
+        }
     }
 
     public function courses(){

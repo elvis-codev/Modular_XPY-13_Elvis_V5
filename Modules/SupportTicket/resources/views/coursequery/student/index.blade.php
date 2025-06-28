@@ -1,11 +1,11 @@
 @extends('student.master_layout')
 @section('title')
-    <title>{{ __('translate.Teacher Support') }}</title>
+    <title>{{ __('Teacher Support') }}</title>
 @endsection
 
 @section('body-header')
-    <h3 class="crancy-header__title m-0">{{ __('translate.Teacher Support') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Teacher Support') }}</p>
+    <h3 class="crancy-header__title m-0">{{ __('Teacher Support') }}</h3>
+    <p class="crancy-header__text">{{ __('Dashboard') }} >> {{ __('Teacher Support') }}</p>
 @endsection
 
 @section('body-content')
@@ -22,14 +22,14 @@
                                 <div class="crancy-customer-filter">
                                     <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch d-flex items-center justify-between create_new_btn_box">
                                         <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box">
-                                            <h4 class="crancy-product-card__title">{{ __('translate.Teacher Support') }}</h4>
+                                            <h4 class="crancy-product-card__title">{{ __('Teacher Support') }}</h4>
 
                                             <a href="{{ route('student.teacher-support.create') }}" class="crancy-btn "><span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 																<path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
 																<path d="M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
 															</svg>
-                                            </span> {{ __('translate.New Ticket') }}</a>
+                                            </span> {{ __('New Ticket') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -43,31 +43,31 @@
                                             <tr>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
-                                                    {{ __('translate.Serial') }}
+                                                    {{ __('Serial') }}
                                                 </th>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
-                                                    {{ __('translate.Course') }}
+                                                    {{ __('Course') }}
                                                 </th>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
-                                                    {{ __('translate.Subject') }}
-                                                </th>
-
-
-
-                                                <th class="crancy-table__column-2 crancy-table__h2 sorting" >
-                                                    {{ __('translate.Ticket Id') }}
+                                                    {{ __('Subject') }}
                                                 </th>
 
 
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
-                                                    {{ __('translate.Status') }}
+                                                    {{ __('Ticket Id') }}
+                                                </th>
+
+
+
+                                                <th class="crancy-table__column-2 crancy-table__h2 sorting" >
+                                                    {{ __('Status') }}
                                                 </th>
 
                                                 <th class="crancy-table__column-3 crancy-table__h3 sorting">
-                                                    {{ __('translate.Action') }}
+                                                    {{ __('Action') }}
                                                 </th>
 
                                             </tr>
@@ -99,14 +99,14 @@
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         @if ($support_ticket->status == 'open')
-                                                            <span class="badge bg-success text-white">{{ __('translate.In-progress') }}</span>
+                                                            <span class="badge bg-success text-white">{{ __('In-progress') }}</span>
                                                         @else
-                                                            <span class="badge bg-danger text-white">{{ __('translate.Closed') }}</span>
+                                                            <span class="badge bg-danger text-white">{{ __('Closed') }}</span>
                                                         @endif
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <a href="{{ route('student.teacher-support.show', $support_ticket->ticket_id) }}" class="crancy-btn"><i class="far fa-message"></i> {{ __('translate.Chat') }}</a>
+                                                        <a href="{{ route('student.teacher-support.show', $support_ticket->ticket_id) }}" class="crancy-btn"><i class="far fa-message"></i> {{ __('Chat') }}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

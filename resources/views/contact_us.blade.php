@@ -21,7 +21,7 @@
                   <div class="contact_modal contact_modal_page">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">{{ __('translate.Get In Touch') }}</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">{{ __('Get In Touch') }}</h5>
 
                           </div>
                           <div class="modal-body">
@@ -32,26 +32,26 @@
                                       <div class="contact_modal_form_inner">
                                         <input type="hidden" name="instructor_id" value="0">
                                           <input type="text" class="form-control"
-                                                 placeholder="{{ __('translate.Full Name') }} *" name="name" value="{{ html_decode(old('name')) }}">
+                                                 placeholder="{{ __('Full Name') }} *" name="name" value="{{ html_decode(old('name')) }}">
                                       </div>
                                       <div class="contact_modal_form_inner">
                                           <input type="text" class="form-control"
-                                                 placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ html_decode(old('phone')) }}">
+                                                 placeholder="{{ __('Phone') }}" name="phone" value="{{ html_decode(old('phone')) }}">
                                       </div>
                                   </div>
                                   <div class="contact_modal_form_item">
                                       <div class="contact_modal_form_inner">
                                           <input type="email" class="form-control"
-                                                 placeholder="{{ __('translate.Email') }}  *" name="email" value="{{ html_decode(old('email')) }}">
+                                                 placeholder="{{ __('Email') }}  *" name="email" value="{{ html_decode(old('email')) }}">
                                       </div>
                                       <div class="contact_modal_form_inner">
                                           <input type="text" class="form-control"
-                                                 placeholder="{{ __('translate.Subject') }} *" name="subject" value="{{ html_decode(old('subject')) }}">
+                                                 placeholder="{{ __('Subject') }} *" name="subject" value="{{ html_decode(old('subject')) }}">
                                       </div>
                                   </div>
                                   <div class="contact_modal_form_item">
                                       <div class="contact_modal_form_inner">
-                                <textarea class="form-control" placeholder="{{ __('translate.Message') }} *"
+                                <textarea class="form-control" placeholder="{{ __('Message') }} *"
                                           rows="5" name="message">{{ html_decode(old('message')) }}</textarea>
                                       </div>
                                   </div>
@@ -65,7 +65,7 @@
                                   <div class="contact_modal_form_item">
                                       <button type="submit" class="td_btn td_style_1 td_radius_30 td_medium td_with_shadow">
                                 <span class="td_btn_in td_white_color td_accent_bg">
-                                    <span>{{ __('translate.Send Message') }}</span>
+                                    <span>{{ __('Send Message') }}</span>
                                     <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor"
@@ -87,7 +87,7 @@
               <div class="col-xl-4 offset-xl-1 col-lg-5">
                 <div class="td_contact_info">
                   <div class="td_section_heading td_style_2 td_mb_20">
-                    <h2 class="td_contact_info_title td_fs_36 mb-0">{{ __('translate.Our Office Address') }}</h2>
+                    <h2 class="td_contact_info_title td_fs_36 mb-0">{{ __('Our Office Address') }}</h2>
                   </div>
                   <div class="td_mb_40">
                     <h2 class="td_fs_24 td_semibold td_mb_20">{{ $contact_us->compus_one }}</h2>

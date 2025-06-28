@@ -341,7 +341,7 @@
           </div>
           <a href="{{ route('about-us') }}" class="td_btn td_style_1 td_radius_30 td_medium td_with_shadow">
             <span class="td_btn_in td_white_color td_accent_bg">
-              <span>{{ __('translate.More About') }}</span>
+              <span>{{ __('More About') }}</span>
               <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor" stroke-width="1.5"
                   stroke-linecap="round" stroke-linejoin="round"></path>

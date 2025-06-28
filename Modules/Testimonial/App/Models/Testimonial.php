@@ -31,15 +31,33 @@ class Testimonial extends Model
     protected $appends = ['name', 'designation', 'comment'];
 
     public function getNameAttribute(){
-        return $this->front_translate?->name;
+        if($this->front_translate && $this->front_translate->name){
+            return $this->front_translate->name;
+        }elseif($this->translate && $this->translate->name){
+            return $this->translate->name;
+        }else{
+            return 'Sin nombre';
+        }
     }
 
     public function getCommentAttribute(){
-        return $this->front_translate?->comment;
+        if($this->front_translate && $this->front_translate->comment){
+            return $this->front_translate->comment;
+        }elseif($this->translate && $this->translate->comment){
+            return $this->translate->comment;
+        }else{
+            return 'Sin comentario';
+        }
     }
 
     public function getDesignationAttribute(){
-        return $this->front_translate?->designation;
+        if($this->front_translate && $this->front_translate->designation){
+            return $this->front_translate->designation;
+        }elseif($this->translate && $this->translate->designation){
+            return $this->translate->designation;
+        }else{
+            return 'Sin cargo';
+        }
     }
     
 }

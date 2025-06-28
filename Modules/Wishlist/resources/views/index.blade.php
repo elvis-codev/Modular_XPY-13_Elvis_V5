@@ -1,12 +1,12 @@
 @extends('student.master_layout')
 
 @section('title')
-<title>{{ __('translate.Wihslist') }}</title>
+<title>{{ __('Wihslist') }}</title>
 @endsection
 
 @section('body-header')
-<h3 class="crancy-header__title m-0">{{ __('translate.Wihslist') }}</h3>
-<p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Wihslist') }}</p>
+<h3 class="crancy-header__title m-0">{{ __('Wihslist') }}</h3>
+<p class="crancy-header__text">{{ __('Dashboard') }} >> {{ __('Wihslist') }}</p>
 @endsection
 
 @section('body-content')
@@ -27,7 +27,7 @@
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <div class="d-block td_card td_radius_10 td_style_3">
                                                         @if ($course?->is_popular == 'enable')
-                                                            <span class="td_card_label td_accent_bg td_white_color">{{ __('translate.Popular') }}</span>
+                                                            <span class="td_card_label td_accent_bg td_white_color">{{ __('Popular') }}</span>
                                                         @endif
                                                         <a href="javascript:;" class="add_to_wishlist d-block active" onclick="removeWishlist('{{ $course->id }}')">
                                                             <span class="td_cart_wishlist_icon">
@@ -51,13 +51,13 @@
                                                                     <li>
                                                                         @include('svg.course_seat')
 
-                                                                        <span class="td_opacity_7">{{ $course->total_student }} {{ __('translate.Students') }}</span>
+                                                                        <span class="td_opacity_7">{{ $course->total_student }} {{ __('Students') }}</span>
                                                                     </li>
                                                                     <li>
 
                                                                         @include('svg.course_semester')
 
-                                                                        <span class="td_opacity_7">{{ $course->total_lesson }} {{ __('translate.Lessons') }}</span>
+                                                                        <span class="td_opacity_7">{{ $course->total_lesson }} {{ __('Lessons') }}</span>
                                                                     </li>
                                                                 </ul>
                                                                 <div class="td_card_category_df td_mb_14">
@@ -92,12 +92,12 @@
                                                                             <i class="fa-solid fa-star fa-fw"></i>
                                                                         </div>
                                                                     </div>
-                                                                    <span class="td_heading_color td_opacity_5 td_medium">({{ $course->total_rating }} {{ __('translate.Ratings') }})</span>
+                                                                    <span class="td_heading_color td_opacity_5 td_medium">({{ $course->total_rating }} {{ __('Ratings') }})</span>
                                                                 </div>
                                                                 <div class="td_card_btn">
                                                                     <a href="javascript:;" class="td_btn td_style_1 td_radius_30 td_medium add_to_cart" data-course_id="{{ $course->id }}">
                                                                         <span class="td_btn_in td_white_color td_accent_bg">
-                                                                            <span>{{ __('translate.Add to Cart') }}</span>
+                                                                            <span>{{ __('Add to Cart') }}</span>
                                                                         </span>
                                                                     </a>
                                                                 </div>
@@ -159,7 +159,7 @@
                     if(err.status == 403){
                         toastr.error(err.responseJSON.message)
                     }else{
-                        toastr.error(`{{ __('translate.Server error occured') }}`)
+                        toastr.error(`{{ __('Server error occured') }}`)
                     }
 
                 }
@@ -172,13 +172,13 @@
 
     function removeWishlist(id){
         Swal.fire({
-            title: "{{ __('translate.Are you realy want to delete this item ?') }}",
+            title: "{{ __('Are you realy want to delete this item ?') }}",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: "{{ __('translate.Yes, Delete It') }}",
-            cancelButtonText: "{{ __('translate.Cancel') }}",
+            confirmButtonText: "{{ __('Yes, Delete It') }}",
+            cancelButtonText: "{{ __('Cancel') }}",
         }).then((result) => {
             if (result.isConfirmed) {
                 $("#remove_listing_"+id).submit();

@@ -22,11 +22,21 @@ class Footer extends Model
 
     protected $appends = ['about_us'];
 
+    public function translate(){
+        return $this->belongsTo(FooterTranslation::class, 'id', 'footer_id')->where('lang_code', admin_lang());
+    }
+
     public function front_translate(){
         return $this->belongsTo(FooterTranslation::class, 'id', 'footer_id')->where('lang_code', front_lang());
     }
 
     public function getAboutUsAttribute(){
-        return $this->front_translate?->about_us;
+        if($this->front_translate && $this->front_translate->about_us){
+            return $this->front_translate->about_us;
+        }elseif($this->translate && $this->translate->about_us){
+            return $this->translate->about_us;
+        }else{
+            return 'Sin información';
+        }
     }
 }

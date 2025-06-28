@@ -467,9 +467,13 @@
                         <li><a href="{{ route('admin.language.index') }}"><span class="menu-bar__text"><span
                                         class="menu-bar__name">{{ __('translate.Languages') }}</span></span></a></li>
 
-                        <li><a href="{{ route('admin.theme-language', ['lang_code' => 'en']) }}"><span
-                                    class="menu-bar__text"><span
-                                        class="menu-bar__name">{{ __('translate.Theme Languages') }}</span></span></a></li>
+                        @foreach($language_list as $language)
+                            @if($language->status == 1)
+                                <li><a href="{{ route('admin.theme-language', ['lang_code' => $language->lang_code]) }}"><span
+                                            class="menu-bar__text"><span
+                                                class="menu-bar__name">{{ __('translate.Theme Languages') }} ({{ $language->lang_name }})</span></span></a></li>
+                            @endif
+                        @endforeach
 
                     </ul>
                 </div>

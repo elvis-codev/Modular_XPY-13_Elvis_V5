@@ -155,6 +155,22 @@
                                         </a>
                                     </li>
 
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3 3H21V21H3V3ZM5 5V19H19V5H5ZM7 7H17V9H7V7ZM7 11H17V13H7V11ZM7 15H13V17H7V15Z" fill="#6440FBFF"/>
+                                                </svg>
+                                            </span>
+                                            {{ __('translate.School') }}: 
+                                            @if($user->school)
+                                                <strong>{{ $user->school->name }}</strong>
+                                            @else
+                                                <span class="text-muted">{{ __('translate.No School Assigned') }}</span>
+                                            @endif
+                                        </a>
+                                    </li>
+
                                 </ul>
 
                             </div>
@@ -170,6 +186,8 @@
                                 <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#editModal" class="crancy-btn crancy-full-width mg-top-20 user_edit_btn"> <i class="fas fa-edit    "></i> {{ __('translate.Edit Profile') }}</a>
 
                                 <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#assignCourseModal" class="crancy-btn crancy-full-width mg-top-20" style="background-color: #28a745; border-color: #28a745;"> <i class="fas fa-plus-circle"></i> Asignar Cursos</a>
+
+                                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#assignSchoolModal" class="crancy-btn crancy-full-width mg-top-20" style="background-color: #007bff; border-color: #007bff;"> <i class="fas fa-school"></i> {{ __('translate.Assign School') }}</a>
 
                                 <a onclick="itemDeleteConfrimation({{ $user->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn crancy-full-width mg-top-20 user_delete_btn"> <i class="fas fa-trash    "></i> {{ __('translate.Delete Student') }}</a>
 
@@ -437,6 +455,60 @@
         </div>
     </div>
 
+    {{-- Assign School Modal --}}
+    <div class="modal fade" id="assignSchoolModal" tabindex="-1" aria-labelledby="assignSchoolModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignSchoolModalLabel">{{ __('translate.Assign School to Student') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignSchoolForm">
+                        @csrf
+                        <input type="hidden" name="student_id" value="{{ $user->id }}">
+                        
+                        <div class="crancy__item-form--group">
+                            <label class="crancy__item-label">{{ __('translate.Select School') }} *</label>
+                            <select class="form-select crancy__item-input" name="school_id" id="schoolSelect" required>
+                                <option value="">{{ __('translate.Select School') }}...</option>
+                                @php
+                                    $all_schools = \App\Models\School::where('status', 'active')->get();
+                                @endphp
+                                @if($all_schools->count() > 0)
+                                    @foreach($all_schools as $school)
+                                        <option value="{{ $school->id }}" {{ $user->school_id == $school->id ? 'selected' : '' }}>
+                                            {{ $school->name }}
+                                        </option>
+                                    @endforeach
+                                @else
+                                    <option value="">{{ __('translate.No schools available') }}</option>
+                                @endif
+                            </select>
+                        </div>
+
+                        <div class="crancy__item-form--group mg-top-form-20">
+                            <label class="crancy__item-label">{{ __('translate.Student') }}</label>
+                            <input class="crancy__item-input" type="text" value="{{ html_decode($user->name) }} ({{ $user->email }})" readonly>
+                        </div>
+
+                        @if($user->school)
+                        <div class="crancy__item-form--group mg-top-form-20">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i> {{ __('translate.Current School') }}: <strong>{{ $user->school->name }}</strong>
+                            </div>
+                        </div>
+                        @endif
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('translate.Cancel') }}</button>
+                    <button type="button" class="btn btn-primary" onclick="assignSchool()">{{ __('translate.Assign School') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -528,6 +600,48 @@
                 error: function(xhr){
                     var response = JSON.parse(xhr.responseText);
                     toastr.error(response.message || 'Ocurrió un error al asignar el curso');
+                }
+            });
+        }
+
+        function assignSchool(){
+            var appMODE = "{{ env('APP_MODE') }}"
+            if(appMODE == 'DEMO'){
+                toastr.error('This Is Demo Version. You Can Not Change Anything');
+                return;
+            }
+
+            var schoolId = $('#schoolSelect').val();
+            var studentId = $('input[name="student_id"]').val();
+
+            if(!schoolId){
+                toastr.error('{{ __("translate.Please select a school") }}');
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                data: { 
+                    _token: '{{ csrf_token() }}',
+                    school_id: schoolId,
+                    student_id: studentId
+                },
+                url: "{{ route('admin.assign-school-to-student') }}",
+                success: function(response){
+                    if(response.success){
+                        toastr.success(response.message);
+                        $('#assignSchoolModal').modal('hide');
+                        // Reload the page to show the updated school assignment
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(xhr){
+                    var response = JSON.parse(xhr.responseText);
+                    toastr.error(response.message || '{{ __("translate.An error occurred while assigning the school") }}');
                 }
             });
         }

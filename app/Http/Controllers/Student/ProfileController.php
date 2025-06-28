@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use Illuminate\Http\Request;
 use Auth, File, Image, Str, Hash;
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use Modules\Coupon\App\Models\Coupon;
 use Modules\Course\App\Models\Course;
 use Modules\Wishlist\App\Models\Wishlist;
@@ -43,6 +44,11 @@ class ProfileController extends Controller
 
         $support_tickets = SupportTicket::where('author_id', $user->id)->where('admin_type', 'admin')->latest()->count();
 
+        // Get user's school information for dynamic logo
+        $user_school = null;
+        if ($user->school_id) {
+            $user_school = School::find($user->school_id);
+        }
         
         return view('student.dashboard', [
             'enrollments' => $enrollments,
@@ -51,6 +57,7 @@ class ProfileController extends Controller
             'rejected_transaction' => $rejected_transaction,
             'wishlists' => $wishlists,
             'support_tickets' => $support_tickets,
+            'user_school' => $user_school,
         ]);
 
     }

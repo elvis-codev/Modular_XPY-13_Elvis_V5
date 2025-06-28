@@ -75,6 +75,19 @@
 													<!-- Form Group -->
 													<div class="form-group">
 														<div class="form-group__input">
+															<select class="crancy-wc__form-input" name="school_id" required>
+																<option value="">Seleccionar Colegio</option>
+																@foreach($schools as $school)
+																	<option value="{{ $school->id }}" {{ old('school_id') == $school->id ? 'selected' : '' }}>{{ $school->name }}</option>
+																@endforeach
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="col-12">
+													<!-- Form Group -->
+													<div class="form-group">
+														<div class="form-group__input">
 															<input class="crancy-wc__form-input" placeholder="Contraseña" id="password-field" type="password" name="password">
 															<span class="crancy-wc__toggle"><i class="fas fa-eye-slash" id="toggle-icon"></i></span>
 														</div>

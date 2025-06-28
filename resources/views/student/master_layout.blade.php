@@ -25,6 +25,34 @@
 		<link rel="stylesheet" href="{{ asset('backend/css/dev.css') }}">
         <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
 
+        <!-- School Theming -->
+        @if(Auth::check() && Auth::user()->school)
+        <style>
+            :root {
+                --school-primary-color: {{ Auth::user()->school->primary_color }};
+                --school-secondary-color: {{ Auth::user()->school->secondary_color }};
+            }
+            
+            /* Apply school colors to primary elements */
+            .crancy-btn,
+            .btn-primary {
+                background-color: var(--school-primary-color) !important;
+                border-color: var(--school-primary-color) !important;
+            }
+            
+            .crancy-btn:hover,
+            .btn-primary:hover {
+                background-color: var(--school-primary-color) !important;
+                border-color: var(--school-primary-color) !important;
+                opacity: 0.9;
+            }
+            
+            /* Sidebar active states */
+            .crancy-menu-two .active > a {
+                background: var(--school-primary-color) !important;
+            }
+        </style>
+        @endif
 
         @stack('style_section')
 	</head>
@@ -39,7 +67,11 @@
 					<!-- Logo -->
 					<div class="logo crancy-sidebar-padding pd-right-0">
 						<a class="crancy-logo" href="{{ route('student.dashboard') }}">
-                            <img src="{{ asset($general_setting->logo) }}" alt="logo">
+                            @if(Auth::check() && Auth::user()->school && Auth::user()->school->logo)
+                                <img src="{{ Auth::user()->school->logo_url }}" alt="{{ Auth::user()->school->name }}" style="max-height: 50px; max-width: 150px; object-fit: contain; width: auto; height: auto;">
+                            @else
+                                <img src="{{ asset($general_setting->logo) }}" alt="logo">
+                            @endif
 						</a>
 						<div id="crancy__sicon" class="crancy__sicon close-icon">
 					<span>

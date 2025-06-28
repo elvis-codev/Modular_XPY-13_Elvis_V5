@@ -45,6 +45,7 @@ class User extends Authenticatable
         'zoom_access_token',
         'zoom_refresh_token',
         'zoom_token_expiry',
+        'school_id',
     ];
 
     /**
@@ -99,6 +100,10 @@ class User extends Authenticatable
 
     public function getTotalCourseAttribute(){
         return $this->courses->count();
+    }
+
+    public function school(){
+        return $this->belongsTo(School::class);
     }
 
 

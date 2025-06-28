@@ -56,7 +56,7 @@ class UserController extends Controller
 
     public function user_show($id){
 
-        $user = User::findOrFail($id);
+        $user = User::with('school')->findOrFail($id);
 
         $enrolled_courses = CourseEnrollmentList::whereHas('course_enrollment', function($query) use($user) {
             $query->where('payment_status', 'success')->where('student_id', $user->id);
@@ -386,6 +386,42 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Curso asignado exitosamente al estudiante'
+        ]);
+    }
+
+    public function assignSchoolToStudent(Request $request) {
+        $rules = [
+            'student_id' => 'required|exists:users,id',
+            'school_id' => 'required|exists:schools,id'
+        ];
+        
+        $customMessages = [
+            'student_id.required' => trans('translate.Student ID is required'),
+            'student_id.exists' => trans('translate.Student not found'),
+            'school_id.required' => trans('translate.School ID is required'),
+            'school_id.exists' => trans('translate.School not found')
+        ];
+        
+        $this->validate($request, $rules, $customMessages);
+        
+        $student = User::findOrFail($request->student_id);
+        $school = \App\Models\School::findOrFail($request->school_id);
+        
+        // Check if the school is active
+        if(!$school->isActive()) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('translate.Cannot assign student to an inactive school')
+            ], 400);
+        }
+        
+        // Update student's school assignment
+        $student->school_id = $school->id;
+        $student->save();
+        
+        return response()->json([
+            'success' => true,
+            'message' => trans('translate.School assigned successfully to student')
         ]);
     }
 }

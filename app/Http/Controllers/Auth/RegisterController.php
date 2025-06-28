@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Exception;
 use Mail, Str;
 use App\Models\User;
+use App\Models\School;
 use App\Rules\Captcha;
 use App\Helper\EmailHelper;
 use Illuminate\Http\Request;
@@ -51,9 +52,11 @@ class RegisterController extends Controller
     public function custom_register_page(){
 
         $breadcrumb_title = trans('translate.Sign Up');
+        $schools = School::where('status', 'active')->orderBy('name', 'asc')->get();
 
         return view('auth.register', [
-            'breadcrumb_title' => $breadcrumb_title
+            'breadcrumb_title' => $breadcrumb_title,
+            'schools' => $schools
         ]);
     }
 
@@ -64,6 +67,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', 'min:4', 'max:100'],
+            'school_id' => ['required', 'exists:schools,id'],
             'g-recaptcha-response'=>new Captcha()
 
         ],[
@@ -73,6 +77,8 @@ class RegisterController extends Controller
             'password.required' => trans('translate.Password is required'),
             'password.confirmed' => trans('translate.Confirm password does not match'),
             'password.min' => trans('translate.You have to provide minimum 4 character password'),
+            'school_id.required' => trans('translate.School selection is required'),
+            'school_id.exists' => trans('translate.Selected school is invalid'),
         ]);
 
         $user = User::create([
@@ -83,6 +89,7 @@ class RegisterController extends Controller
             'is_banned' => 'no',
             'password' => Hash::make($request->password),
             'verification_token' => Str::random(100),
+            'school_id' => $request->school_id,
         ]);
 
         EmailHelper::mail_setup();

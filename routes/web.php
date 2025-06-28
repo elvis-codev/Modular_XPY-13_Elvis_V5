@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SchoolController;
 
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -157,6 +158,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
             Route::put('user-status/{id}', 'user_status')->name('user-status');
             Route::put('user-update/{id}', 'update')->name('user-update');
             Route::post('assign-course-to-student', 'assignCourseToStudent')->name('assign-course-to-student');
+            Route::post('assign-school-to-student', 'assignSchoolToStudent')->name('assign-school-to-student');
 
             Route::get('seller-list', 'seller_list')->name('seller-list');
             Route::get('pending-seller', 'pending_seller')->name('pending-seller');
@@ -167,6 +169,18 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
             Route::put('seller-joining-approval/{id}', 'seller_joining_approval')->name('seller-joining-approval');
             Route::put('seller-joining-reject/{id}', 'seller_joining_reject')->name('seller-joining-reject');
 
+        });
+
+        // School Management
+        Route::controller(SchoolController::class)->group(function () {
+            Route::get('schools', 'index')->name('schools.index');
+            Route::get('schools/create', 'create')->name('schools.create');
+            Route::post('schools', 'store')->name('schools.store');
+            Route::get('schools/{school}', 'show')->name('schools.show');
+            Route::get('schools/{school}/edit', 'edit')->name('schools.edit');
+            Route::put('schools/{school}', 'update')->name('schools.update');
+            Route::delete('schools/{school}', 'destroy')->name('schools.destroy');
+            Route::put('school-status/{id}', 'school_status')->name('school-status');
         });
 
          // Frontend Management

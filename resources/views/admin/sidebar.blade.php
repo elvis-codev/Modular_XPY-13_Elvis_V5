@@ -212,6 +212,35 @@
                 </div>
             </li>
 
+            <!-- Manage Schools -->
+            <li class="{{ Route::is('admin.schools.*') ? 'active' : '' }}">
+                <a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__schools"><span
+                        class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L2 8L12 13L22 8L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Manage Schools') }}</span></span> <span
+                        class="crancy__toggle"></span></a></span>
+                <!-- Dropdown Menu -->
+                <div
+                    class="collapse crancy__dropdown {{ Route::is('admin.schools.*') ? 'show' : '' }}"
+                    id="menu-item__schools" data-bs-parent="#CrancyMenu">
+                    <ul class="menu-bar__one-dropdown">
+
+                        <li><a href="{{ route('admin.schools.index') }}"><span class="menu-bar__text"><span
+                                        class="menu-bar__name">{{ __('translate.School List') }}</span></span></a></li>
+
+                        <li><a href="{{ route('admin.schools.create') }}"><span class="menu-bar__text"><span
+                                        class="menu-bar__name">{{ __('translate.Create School') }}</span></span></a></li>
+
+                    </ul>
+                </div>
+            </li>
+
 
             <li class="{{ Route::is('admin.contact-message') || Route::is('admin.show-message') ? 'active' : '' }}"><a
                     class="collapsed" href="{{ route('admin.contact-message') }}">

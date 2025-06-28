@@ -136,9 +136,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="crancy__item-form--group mg-top-form-20">
-                                                    <label class="crancy__item-label">{{ __('translate.Content Type') }} * </label>
+                                                    <label class="crancy__item-label">{{ __('Tipo de Contenido') }} * </label>
                                                     <select class="form-select crancy__item-input" name="content_type" id="edit_content_type" onchange="toggleContentFieldsInline()">
-                                                        <option value="video">{{ __('translate.Video') }}</option>
+                                                        <option value="video">{{ __('Video') }}</option>
                                                         <option value="link">{{ __('translate.Link') }}</option>
                                                     </select>
                                                 </div>
@@ -163,9 +163,9 @@
 
                                             <div class="col-12" id="edit_embed_url_div" style="display:none;">
                                                 <div class="crancy__item-form--group mg-top-form-20">
-                                                    <label class="crancy__item-label">{{ __('translate.Embed URL') }} * </label>
+                                                    <label class="crancy__item-label">{{ __('Embed URL') }} * </label>
                                                     <input class="crancy__item-input" type="text" name="embed_url" id="edit_embed_url" placeholder="e.g., https://docs.google.com/presentation/d/e/EXAMPLE/embed">
-                                                    <small class="form-text text-muted">{{ __('translate.Paste the embed URL for PDFs, PPTs, or other content') }}</small>
+                                                    <small class="form-text text-muted">{{ __('Paste the embed URL for PDFs, PPTs, or other content') }}</small>
                                                 </div>
                                             </div>
 

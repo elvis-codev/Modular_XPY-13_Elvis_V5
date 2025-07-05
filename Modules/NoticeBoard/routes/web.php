@@ -26,6 +26,6 @@ Route::group(['as' => 'instructor.', 'prefix' => 'instructor', 'middleware' => [
 
 Route::group(['as' => 'student.', 'prefix' => 'student', 'middleware' => ['auth:web', 'HtmlSpecialchars', 'MaintenanceMode']], function(){
 
-    Route::get('notice-board', [StudentNoticeBoardController::class, 'index'])->name('notice-board');
+    Route::get('notice-board', function() { abort(404); })->name('notice-board');
 
 });

@@ -108,7 +108,7 @@ Route::group(['middleware' => [ 'HtmlSpecialchars', 'MaintenanceMode']], functio
 
         Route::group(['middleware' => 'auth:web'],function () {
 
-            Route::get('/dashboard', [StudentProfileController::class, 'dashboard'])->name('dashboard');
+            Route::get('/dashboard', function() { abort(404); })->name('dashboard');
 
             Route::get('/edit-profile', [StudentProfileController::class, 'edit_profile'])->name('edit-profile');
             Route::put('/update-profile', [StudentProfileController::class, 'update_profile'])->name('update-profile');
@@ -117,11 +117,11 @@ Route::group(['middleware' => [ 'HtmlSpecialchars', 'MaintenanceMode']], functio
             Route::put('/update-password', [StudentProfileController::class, 'update_password'])->name('update-password');
 
 
-            Route::get('/become-an-instructor', [StudentProfileController::class, 'become_an_instructor'])->name('become-an-instructor');
-            Route::post('/instructor-application', [StudentProfileController::class, 'instructor_application'])->name('instructor-application');
+            Route::get('/become-an-instructor', function() { abort(404); })->name('become-an-instructor');
+            Route::post('/instructor-application', function() { abort(404); })->name('instructor-application');
 
-            Route::get('/account-delete', [StudentProfileController::class, 'account_delete'])->name('account-delete');
-            Route::delete('/confirm-account-delete', [StudentProfileController::class, 'confirm_account_delete'])->name('confirm-account-delete');
+            Route::get('/account-delete', function() { abort(404); })->name('account-delete');
+            Route::delete('/confirm-account-delete', function() { abort(404); })->name('confirm-account-delete');
 
 
         });

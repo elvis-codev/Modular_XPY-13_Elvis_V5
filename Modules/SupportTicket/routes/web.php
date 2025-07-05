@@ -27,8 +27,14 @@ Route::group(['as' => 'student.', 'prefix' => 'student', 'middleware' => ['auth:
     Route::resource('support-ticket', StudentSupportTicketController::class);
     Route::post('support-ticket-message/{id}', [StudentSupportTicketController::class, 'support_ticket_message'])->name('support-ticket-message');
 
-    Route::resource('teacher-support', StudentCourseQueryController::class);
-    Route::post('teacher-support-message/{id}', [StudentCourseQueryController::class, 'support_ticket_message'])->name('teacher-support-message');
+    Route::get('teacher-support', function() { abort(404); })->name('teacher-support.index');
+    Route::get('teacher-support/create', function() { abort(404); })->name('teacher-support.create');
+    Route::post('teacher-support', function() { abort(404); })->name('teacher-support.store');
+    Route::get('teacher-support/{id}', function() { abort(404); })->name('teacher-support.show');
+    Route::get('teacher-support/{id}/edit', function() { abort(404); })->name('teacher-support.edit');
+    Route::put('teacher-support/{id}', function() { abort(404); })->name('teacher-support.update');
+    Route::delete('teacher-support/{id}', function() { abort(404); })->name('teacher-support.destroy');
+    Route::post('teacher-support-message/{id}', function() { abort(404); })->name('teacher-support-message');
 
 });
 

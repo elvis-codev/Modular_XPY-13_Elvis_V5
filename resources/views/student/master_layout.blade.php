@@ -122,38 +122,10 @@
                                                     @php
                                                         $auth_user = Auth::guard('web')->user();
                                                     @endphp
-                                                    @if ($auth_user->instructor_joining_request == 'approved')
-                                                        <div class="profile-switcher-wrapper d-md-flex d-none gap-3 align-items-center">
-                                                            <p class="text">{{ __('translate.Switch to Instructor Portal') }}</p>
-                                                            <label class="custom-switch switch_to_instructor">
-                                                                <input type="checkbox">
-                                                                <span class="slider"></span>
-                                                            </label>
-                                                        </div>
-                                                    @else
-                                                        <div class="profile-switcher-wrapper d-md-flex d-none gap-3 align-items-center">
-                                                            <p class="text">{{ __('translate.Become Instructor') }}</p>
-                                                            <label class="custom-switch join_as_instructor">
-                                                                <input type="checkbox" {{ Route::is('student.become-an-instructor') ? 'checked' : '' }}>
-                                                                <span class="slider"></span>
-                                                            </label>
-                                                        </div>
-                                                    @endif
 
 													<!-- Header Option Group -->
 													<div class="crancy-header__options">
 
-                                                        <!-- Header Notifications -->
-														<div class="crancy-header__single">
-															<a target="_blank" class="crancy-header__blink" href="{{ route('home') }}">
-                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <ellipse cx="12" cy="12" rx="4" ry="10" stroke="currentColor" stroke-width="1.5"/>
-                                                                    <path d="M21.9962 11.7205C20.1938 13.2016 16.3949 14.2222 12 14.2222C7.60511 14.2222 3.80619 13.2016 2.00383 11.7205M21.9962 11.7205C21.8482 6.32691 17.4294 2 12 2C6.57061 2 2.15183 6.32691 2.00383 11.7205M21.9962 11.7205C21.9987 11.8134 22 11.9065 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 11.9065 2.00128 11.8134 2.00383 11.7205" stroke="currentColor" stroke-width="1.5"/>
-                                                                </svg>
-															</a>
-
-														</div>
-														<!-- End Notifications -->
 
 
 

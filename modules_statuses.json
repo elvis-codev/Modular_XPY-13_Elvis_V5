@@ -20,7 +20,7 @@
     "Coupon": true,
     "Partner": true,
     "CertificateBuilder": true,
-    "EventCalendar": true,
+    "EventCalendar": false,
     "SupportTicket": true,
     "NoticeBoard": true
 }

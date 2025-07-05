@@ -32,9 +32,3 @@ Route::group(['as'=> 'instructor.', 'prefix' => 'instructor', 'middleware' => ['
 });
 
 
-Route::group(['as'=> 'student.', 'prefix' => 'student', 'middleware' => ['auth:web']],function (){
-
-    Route::get('event-calendar', [StudentZoomMeetingController::class, 'event_calendar'])->name('event-calendar');
-    Route::get('event-calendar-iframe', [StudentZoomMeetingController::class, 'event_calendar_iframe'])->name('event-calendar-iframe');
-
-});

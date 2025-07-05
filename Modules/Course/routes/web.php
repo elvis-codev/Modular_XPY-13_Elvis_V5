@@ -75,13 +75,13 @@ Route::group(['middleware' => ['HtmlSpecialchars', 'MaintenanceMode']], function
 
     Route::group(['as'=> 'student.', 'prefix' => 'student', 'middleware' => ['auth:web']],function (){
 
-        Route::get('transactions', [StudentEnrollmentController::class, 'transactions'])->name('transactions');
-        Route::get('invoice/{id}', [StudentEnrollmentController::class, 'invoice'])->name('invoice');
+        Route::get('transactions', function() { abort(404); })->name('transactions');
+        Route::get('invoice/{id}', function() { abort(404); })->name('invoice');
     
         Route::get('enrolled-courses', [StudentEnrollmentController::class, 'enrolled_courses'])->name('enrolled-courses');
         Route::get('enrolled-course/{id}', [StudentEnrollmentController::class, 'enrolled_course'])->name('enrolled-course');
         Route::post('mark-lesson-complete', [StudentEnrollmentController::class, 'mark_lesson_complete'])->name('mark-lesson-complete');
-        Route::get('wishlist', [StudentEnrollmentController::class, 'wishlist'])->name('wishlist');
+        Route::get('wishlist', function() { abort(404); })->name('wishlist');
     
         Route::post('/store-review/{course_id}', [StudentEnrollmentController::class, 'store_review'])->name('store-review');
     

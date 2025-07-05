@@ -10,17 +10,6 @@
     <div class="menu-bar">
         <ul id="CrancyMenu" class="menu-bar__one crancy-dashboard-menu">
 
-            <li class="{{ Route::is('student.dashboard') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.dashboard') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-
-                    <svg class="crancy-svg-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.02 2.84L3.63 7.04C2.73 7.74 2 9.23 2 10.36V17.77C2 20.09 3.89 21.99 6.21 21.99H17.79C20.11 21.99 22 20.09 22 17.78V10.5C22 9.29 21.19 7.74 20.2 7.05L14.02 2.72C12.62 1.74 10.37 1.79 9.02 2.84Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 17.99V14.99" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Dashboard') }}</span></span></a>
-            </li>
 
 
             <li class="{{ Route::is('student.enrolled-courses') || Route::is('student.enrolled-course') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.enrolled-courses') }}"><span class="menu-bar__text">
@@ -36,33 +25,6 @@
             </li>
 
 
-            <li class="{{ Route::is('student.transactions') || Route::is('student.invoice') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.transactions') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-
-                    <svg class="crancy-svg-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 8H22M11 19H4C2.89543 19 2 18.1046 2 17V5C2 3.89543 2.89543 3 4 3H20C21.1046 3 22 3.89543 22 5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 16V15H22L20.5 13M22 18V19H15L16.5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-
-                </span>
-                <span class="menu-bar__name">{{ __('translate.My Transaction') }}</span></span></a>
-            </li>
-            <li class="{{ Route::is('student.wishlist.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.wishlist.index') }}">
-                <span class="menu-bar__text">
-                    <span class="crancy-menu-icon crancy-svg-icon__v1">
-
-
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 6.49999C18.1045 6.49999 19 7.39542 19 8.49999M12 5.70252L12.6851 4.99999C14.816 2.8147 18.2709 2.8147 20.4018 4.99999C22.4755 7.12659 22.5392 10.5538 20.5461 12.7599L14.8197 19.0981C13.2984 20.782 10.7015 20.782 9.18026 19.0981L3.45393 12.7599C1.46078 10.5538 1.5245 7.12661 3.5982 5C5.72912 2.81471 9.18404 2.81472 11.315 5.00001L12 5.70252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-
-
-                    </span>
-                    <span class="menu-bar__name">{{ __('translate.Wishlist') }}</span>
-                </span>
-
-                </a>
-            </li>
 
 
 
@@ -97,60 +59,9 @@
                 </a>
             </li>
 
-            <li class="{{ Route::is('student.event-calendar') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.event-calendar') }}">
-                <span class="menu-bar__text">
-                    <span class="crancy-menu-icon crancy-svg-icon__v1">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M18 2V4M6 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M11.9955 13H12.0045M11.9955 17H12.0045M15.991 13H16M8 13H8.00897M8 17H8.00897" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M3.5 8H20.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M2.5 12.2432C2.5 7.88594 2.5 5.70728 3.75212 4.35364C5.00424 3 7.01949 3 11.05 3H12.95C16.9805 3 18.9958 3 20.2479 4.35364C21.5 5.70728 21.5 7.88594 21.5 12.2432V12.7568C21.5 17.1141 21.5 19.2927 20.2479 20.6464C18.9958 22 16.9805 22 12.95 22H11.05C7.01949 22 5.00424 22 3.75212 20.6464C2.5 19.2927 2.5 17.1141 2.5 12.7568V12.2432Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M3 8H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
 
 
-                    </span>
-                    <span class="menu-bar__name">{{ __('translate.Calendar') }}</span>
-                </span>
 
-                </a>
-            </li>
-
-
-            <li class="{{ Route::is('student.notice-board') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.notice-board') }}">
-                <span class="menu-bar__text">
-                    <span class="crancy-menu-icon crancy-svg-icon__v1">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.99805 16H11.998M7.99805 11H15.998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M7.5 3.5C5.9442 3.54667 5.01661 3.71984 4.37477 4.36227C3.49609 5.24177 3.49609 6.6573 3.49609 9.48836V15.9944C3.49609 18.8255 3.49609 20.241 4.37477 21.1205C5.25345 22 6.66767 22 9.49609 22H14.4961C17.3245 22 18.7387 22 19.6174 21.1205C20.4961 20.241 20.4961 18.8255 20.4961 15.9944V9.48836C20.4961 6.6573 20.4961 5.24177 19.6174 4.36228C18.9756 3.71984 18.048 3.54667 16.4922 3.5" stroke="currentColor" stroke-width="1.5"/>
-<path d="M7.49609 3.75C7.49609 2.7835 8.2796 2 9.24609 2H14.7461C15.7126 2 16.4961 2.7835 16.4961 3.75C16.4961 4.7165 15.7126 5.5 14.7461 5.5H9.24609C8.2796 5.5 7.49609 4.7165 7.49609 3.75Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-
-
-                    </span>
-                    <span class="menu-bar__name">{{ __('translate.Notice Board') }}</span>
-                </span>
-
-                </a>
-            </li>
-
-            <li class="{{ Route::is('student.teacher-support.*') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.teacher-support.index') }}">
-                <span class="menu-bar__text">
-                    <span class="crancy-menu-icon crancy-svg-icon__v1">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 3H19C20.1046 3 21 3.89543 21 5V13.5C21 14.6046 20.1046 15.5 19 15.5H10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M11 7H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M7 8C7 9.10457 6.10457 10 5 10C3.89543 10 3 9.10457 3 8C3 6.89543 3.89543 6 5 6C6.10457 6 7 6.89543 7 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.5 12.5H6.99015M6.99015 12.5H4.00017C3.44791 12.5 3.0002 12.9477 3.00018 13.4999L3 17M6.99015 12.5L7 17M3 21V17M3 17H7M7 17V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-
-                    </span>
-                    <span class="menu-bar__name">{{ __('translate.Teacher Support') }}</span>
-                </span>
-
-                </a>
-            </li>
 
 
             <li class="{{ Route::is('student.support-ticket.*') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.support-ticket.index') }}">
@@ -177,23 +88,6 @@
 
 
 
-            <li class="{{ Route::is('student.account-delete') ? 'active' : '' }}"><a class="collapsed" href="{{ route('student.account-delete') }}">
-                <span class="menu-bar__text">
-                    <span class="crancy-menu-icon crancy-svg-icon__v1">
-                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 11.5H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10.5 15.5H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M19.5 5.5L18.6139 20.121C18.5499 21.1766 17.6751 22 16.6175 22H7.38246C6.32488 22 5.4501 21.1766 5.38612 20.121L4.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M3 5.5H8M8 5.5L9.24025 2.60608C9.39783 2.2384 9.75937 2 10.1594 2H13.8406C14.2406 2 14.6022 2.2384 14.7597 2.60608L16 5.5M8 5.5H16M21 5.5H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-
-
-                    </span>
-                    <span class="menu-bar__name">{{ __('translate.Account Delete') }}</span>
-                </span>
-
-                </a>
-            </li>
 
             <li><a href="{{ route('student.logout') }}" class="collapsed"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
@@ -209,16 +103,6 @@
 
         </ul>
     </div>
-    @if ($auth_user->instructor_joining_request == 'approved')
-
-        <div class="d-flex d-md-none justify-content-center pt-5">
-            <a href="{{ route('instructor.dashboard') }}" class="panel-switcher-btn">{{ __('translate.Instructor Panel') }}</a>
-        </div>
-    @else
-        <div class="d-flex d-md-none justify-content-center pt-5">
-            <a href="{{ route('student.become-an-instructor') }}" class="panel-switcher-btn">{{ __('translate.Become Instructor') }}</a>
-        </div>
-    @endif
 
     <!-- End Nav Menu -->
 </div>

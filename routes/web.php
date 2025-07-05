@@ -22,7 +22,18 @@ use App\Http\Controllers\Instructor\ProfileController as InstructorProfileContro
 
 Route::group(['middleware' => [ 'HtmlSpecialchars', 'MaintenanceMode']], function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    // Redirect root to student login
+    Route::get('/', function () {
+        return redirect()->route('student.login');
+    })->name('home');
+
+    // Block access to landing page - redirect to student login
+    Route::get('/landing', function () {
+        return redirect()->route('student.login');
+    });
+    Route::get('/index', function () {
+        return redirect()->route('student.login');
+    });
 
     Route::get('/about-us', [HomeController::class, 'about_us'])->name('about-us');
 

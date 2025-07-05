@@ -35,21 +35,41 @@ Route::group(['middleware' => [ 'HtmlSpecialchars', 'MaintenanceMode']], functio
         return redirect()->route('student.login');
     });
 
-    Route::get('/about-us', [HomeController::class, 'about_us'])->name('about-us');
+    // Block all landing page routes - redirect to student login
+    Route::get('/about-us', function () {
+        return redirect()->route('student.login');
+    })->name('about-us');
 
-    Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
-    Route::get('/blog/{slug}', [HomeController::class, 'blog'])->name('blog');
-    Route::post('/store-blog-comment/{id}', [HomeController::class, 'store_blog_comment'])->name('store-blog-comment');
+    Route::get('/blogs', function () {
+        return redirect()->route('student.login');
+    })->name('blogs');
+    Route::get('/blog/{slug}', function () {
+        return redirect()->route('student.login');
+    })->name('blog');
+    Route::post('/store-blog-comment/{id}', function () {
+        return redirect()->route('student.login');
+    })->name('store-blog-comment');
 
-    Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
+    Route::get('/faq', function () {
+        return redirect()->route('student.login');
+    })->name('faq');
 
-    Route::get('/privacy-policy', [HomeController::class, 'privacy_policy'])->name('privacy-policy');
-    Route::get('/terms-conditions', [HomeController::class, 'terms_conditions'])->name('terms-conditions');
+    Route::get('/privacy-policy', function () {
+        return redirect()->route('student.login');
+    })->name('privacy-policy');
+    Route::get('/terms-conditions', function () {
+        return redirect()->route('student.login');
+    })->name('terms-conditions');
 
-    Route::get('/custom-page/{slug}', [HomeController::class, 'custom_page'])->name('custom-page');
+    Route::get('/custom-page/{slug}', function () {
+        return redirect()->route('student.login');
+    })->name('custom-page');
 
-    Route::get('/contact-us', [HomeController::class, 'contact_us'])->name('contact-us');
+    Route::get('/contact-us', function () {
+        return redirect()->route('student.login');
+    })->name('contact-us');
 
+    // Keep functional routes but ensure they redirect back to student login
     Route::get('/language-switcher', [HomeController::class,  'language_switcher'])->name('language-switcher');
     Route::get('/currency-switcher', [HomeController::class, 'currency_switcher'])->name('currency-switcher');
 

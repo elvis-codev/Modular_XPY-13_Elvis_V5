@@ -188,7 +188,7 @@ class LoginController extends Controller
 
             $notify_message= trans('translate.A password reset link has been send to your mail');
             $notify_message = array('message'=>$notify_message,'alert-type'=>'success');
-            return redirect()->back()->with($notify_message);
+            return redirect()->route('student.login')->with($notify_message);
 
         }else{
             $notify_message = trans('translate.Email not found');

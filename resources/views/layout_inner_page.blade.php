@@ -162,8 +162,7 @@
 
             <span>
               @guest('web')
-                <a href="{{ route('student.login') }}" class="">{{ __('translate.Login') }}</a> /
-                <a href="{{ route('student.register') }}" class="">{{ __('translate.Register') }}</a>
+                <a href="{{ route('student.login') }}" class="">{{ __('translate.Login') }}</a>
                 @else
                 <a href="{{ Auth::guard('web')->user()->is_seller == 1 ? route('instructor.dashboard') : route('student.dashboard') }}" class="">{{ __('translate.Dashboard') }}</a>
               @endguest

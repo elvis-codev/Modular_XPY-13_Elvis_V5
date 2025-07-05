@@ -21,6 +21,19 @@
 		<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 		<link rel="stylesheet" href="{{ asset('backend/css/dev.css') }}">
         <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
+        
+        <style>
+            .crancy-wc__forgot-password {
+                color: #6c757d;
+                text-decoration: none;
+                font-size: 14px;
+                transition: color 0.3s ease;
+            }
+            .crancy-wc__forgot-password:hover {
+                color: #007bff;
+                text-decoration: underline;
+            }
+        </style>
 
 	</head>
 	<body id="crancy-dark-light">
@@ -48,8 +61,8 @@
 									<div class="crancy-wc__form-top">
 
 										<div class="crancy-wc__heading pd-btm-20">
-											<h3 class="crancy-wc__form-title crancy-wc__form-title__one m-0">{{ __('Login Here') }}</h3>
-											<p>{{ __('Welcome to Educve Student Panel') }}</p>
+											<h3 class="crancy-wc__form-title crancy-wc__form-title__one m-0">{{ __('Iniciar Sesión') }}</h3>
+											<p>{{ __('Bienvenido(a) al panel de acceso') }}</p>
 										</div>
 										<!-- Sign in Form -->
 										<form class="crancy-wc__form-main" action="{{ route('student.store-login') }}" method="post">
@@ -59,7 +72,7 @@
 													<!-- Form Group -->
 													<div class="form-group">
 														<div class="form-group__input">
-															<input class="crancy-wc__form-input" type="email" name="email" placeholder="{{ __('Email') }}" value="{{ old('email') }}">
+															<input class="crancy-wc__form-input" type="email" name="email" placeholder="{{ __('Correo Electrónico') }}" value="{{ old('email') }}">
 														</div>
 													</div>
 												</div>
@@ -67,7 +80,7 @@
 													<!-- Form Group -->
 													<div class="form-group">
 														<div class="form-group__input">
-															<input class="crancy-wc__form-input" placeholder="{{ __('Password') }}" id="password-field" type="password" name="password">
+															<input class="crancy-wc__form-input" placeholder="{{ __('Contraseña') }}" id="password-field" type="password" name="password">
 															<span class="crancy-wc__toggle"><i class="fas fa-eye-slash" id="toggle-icon"></i></span>
 														</div>
 													</div>
@@ -83,10 +96,15 @@
 											<!-- Form Group -->
 											<div class="form-group mg-top-30">
 												<div class="crancy-wc__button">
-													<button class="ntfmax-wc__btn" type="submit">{{ __('Login Now') }}</button>
+													<button class="ntfmax-wc__btn" type="submit">{{ __('Ingresar') }}</button>
 												</div>
 											</div>
 
+											<div class="crancy-wc__form-bottom text-center mg-top-20">
+												<a href="{{ route('student.forget-password') }}" class="crancy-wc__forgot-password">
+													{{ __('¿Olvidaste tu contraseña?') }}
+												</a>
+											</div>
 
 										</form>
 										<!-- End Sign in Form -->

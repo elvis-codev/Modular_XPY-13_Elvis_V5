@@ -1057,5 +1057,17 @@
   'Enable' => 'Habilitar',
   'Disable' => 'Deshabilitar',
   'Status' => 'Estado',
+  '¿Olvidaste tu contraseña?' => '¿Olvidaste tu contraseña?',
+  'Recuperar Contraseña' => 'Recuperar Contraseña',
+  'Ingresa tu correo electrónico para recibir el enlace de recuperación' => 'Ingresa tu correo electrónico para recibir el enlace de recuperación',
+  'Correo Electrónico' => 'Correo Electrónico',
+  'Enviar Enlace' => 'Enviar Enlace',
+  'Volver al Login' => 'Volver al Login',
+  
+  // 404 Error Page Translations
+  '404' => '404',
+  'Oops! Page not found' => '¡Ups! Página no encontrada',
+  'Oops! it could be you or us, there is no page here. It might have been moved or deleted.' => '¡Ups! Puede ser culpa tuya o nuestra, no hay ninguna página aquí. Puede que haya sido movida o eliminada.',
+  'Back To Home' => 'Volver al Inicio',
 );
  ?>

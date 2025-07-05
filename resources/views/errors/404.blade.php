@@ -36,14 +36,14 @@
               <img src="{{ asset($general_setting->error_image) }}" alt="thumb">
             </div>
             <div class="courses_not_found_text">
-              <h3>{{ __('Oops! Page not found') }}</h3>
+              <h3>¡Ups! Página no encontrada</h3>
               <p>
-                {{ __('Oops! it could be you or us, there is no page here. It might have been moved or deleted.') }}
+                ¡Ups! Puede ser culpa tuya o nuestra, no hay ninguna página aquí. Puede que haya sido movida o eliminada.
               </p>
 
               <a href="{{ route('home') }}" class="td_btn td_style_1 td_radius_30 td_medium td_with_shadow">
                 <span class="td_btn_in td_white_color td_accent_bg">
-                  <span>{{ __('Back To Home') }}</span>
+                  <span>Volver al Inicio</span>
                   <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.1575 4.34302L3.84375 15.6567" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round"></path>

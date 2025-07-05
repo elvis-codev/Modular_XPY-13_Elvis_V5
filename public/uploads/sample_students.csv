@@ -1,0 +1,4 @@
+name,email,password,school_id,status
+John Doe,john@example.com,password123,1,enable
+Jane Smith,jane@example.com,abc12345,2,enable
+Carlos Pérez,carlos@example.com,pass456,1,enable

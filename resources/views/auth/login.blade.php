@@ -87,9 +87,6 @@
 												</div>
 											</div>
 
-											<div class="crancy-wc__form-bottom">
-												<p>¿No tienes una cuenta? <a href="{{ route('student.register') }}">Registrarse</a></p>
-											</div>
 
 										</form>
 										<!-- End Sign in Form -->

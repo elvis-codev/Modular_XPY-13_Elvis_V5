@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Models\User;
+use App\Models\School;
 
 use App\Helper\EmailHelper;
 
@@ -38,20 +39,22 @@ class UserController extends Controller
 
     public function user_list(){
 
-        $users = User::where('status', 'enable')->latest()->get();
+        $users = User::with('school')->where('status', 'enable')->latest()->get();
+        $schools = School::where('status', 'active')->orderBy('name')->get();
 
         $title = trans('translate.Student List');
 
-        return view('admin.user.user_list', ['users' => $users, 'title' => $title]);
+        return view('admin.user.user_list', ['users' => $users, 'schools' => $schools, 'title' => $title]);
     }
 
     public function pending_user(){
 
-        $users = User::where('status', 'disable')->latest()->get();
+        $users = User::with('school')->where('status', 'disable')->latest()->get();
+        $schools = School::where('status', 'active')->orderBy('name')->get();
 
         $title = trans('translate.Pending Student');
 
-        return view('admin.user.user_list', ['users' => $users, 'title' => $title]);
+        return view('admin.user.user_list', ['users' => $users, 'schools' => $schools, 'title' => $title]);
     }
 
     public function user_show($id){
@@ -423,5 +426,111 @@ class UserController extends Controller
             'success' => true,
             'message' => trans('translate.School assigned successfully to student')
         ]);
+    }
+
+    public function createStudentWithSchool(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+            'school_id' => 'nullable|exists:schools,id',
+            'status' => 'required|in:enable,disable'
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->school_id = $request->school_id;
+        $user->status = $request->status;
+        $user->is_seller = 0; // Student
+        $user->email_verified_at = now();
+        $user->save();
+
+        $notify_message = trans('translate.Student created successfully');
+        $notify_message = array('message' => $notify_message, 'alert-type' => 'success');
+        return redirect()->back()->with($notify_message);
+    }
+
+    public function bulkImportStudentsWithSchool(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv,txt'
+        ]);
+
+        try {
+            $file = $request->file('csv_file');
+            $csvData = array_map('str_getcsv', file($file->getRealPath()));
+            
+            $successCount = 0;
+            $errorCount = 0;
+            $errors = [];
+
+            foreach ($csvData as $index => $row) {
+                // Skip empty rows
+                if (empty(array_filter($row))) continue;
+
+                // Ensure we have at least 3 columns (name, email, password)
+                if (count($row) < 3) {
+                    $errors[] = "Row " . ($index + 1) . ": Invalid format - minimum 3 columns required";
+                    $errorCount++;
+                    continue;
+                }
+
+                $name = trim($row[0]);
+                $email = trim($row[1]);
+                $password = trim($row[2]);
+                $school_id = isset($row[3]) && !empty(trim($row[3])) ? trim($row[3]) : null;
+                $status = isset($row[4]) && !empty(trim($row[4])) ? trim($row[4]) : 'enable';
+
+                // Validate required fields
+                if (empty($name) || empty($email) || empty($password)) {
+                    $errors[] = "Row " . ($index + 1) . ": Name, email, and password are required";
+                    $errorCount++;
+                    continue;
+                }
+
+                // Check if email already exists
+                if (User::where('email', $email)->exists()) {
+                    $errors[] = "Row " . ($index + 1) . ": Email {$email} already exists";
+                    $errorCount++;
+                    continue;
+                }
+
+                // Validate school if provided
+                if ($school_id && !School::where('id', $school_id)->where('status', 'active')->exists()) {
+                    $errors[] = "Row " . ($index + 1) . ": Invalid or inactive school ID {$school_id}";
+                    $errorCount++;
+                    continue;
+                }
+
+                // Create user
+                $user = new User();
+                $user->name = $name;
+                $user->email = $email;
+                $user->password = bcrypt($password);
+                $user->school_id = $school_id;
+                $user->status = in_array($status, ['enable', 'disable']) ? $status : 'enable';
+                $user->is_seller = 0; // Student
+                $user->email_verified_at = now();
+                $user->save();
+
+                $successCount++;
+            }
+
+            $message = trans('translate.Import completed') . ": {$successCount} " . trans('translate.students created');
+            if ($errorCount > 0) {
+                $message .= ", {$errorCount} " . trans('translate.errors occurred');
+            }
+
+            $notify_message = array('message' => $message, 'alert-type' => 'success');
+            return redirect()->back()->with($notify_message);
+
+        } catch (Exception $e) {
+            $notify_message = trans('translate.Import failed') . ": " . $e->getMessage();
+            $notify_message = array('message' => $notify_message, 'alert-type' => 'error');
+            return redirect()->back()->with($notify_message);
+        }
     }
 }

@@ -78,12 +78,6 @@ Route::group(['middleware' => [ 'HtmlSpecialchars', 'MaintenanceMode']], functio
             Route::get('/reset-password', 'custom_reset_password')->name('reset-password');
             Route::post('/store-reset-password/{token}', 'store_reset_password')->name('store-reset-password');
 
-            Route::controller(StudentRegisterController::class)->group(function () {
-
-                Route::get('/register', 'custom_register_page')->name('register');
-                Route::post('/store-register', 'store_register')->name('store-register');
-                Route::get('/register-verification', 'register_verification')->name('register-verification');
-            });
 
 
         });
@@ -170,6 +164,8 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin'],function (){
             Route::put('user-update/{id}', 'update')->name('user-update');
             Route::post('assign-course-to-student', 'assignCourseToStudent')->name('assign-course-to-student');
             Route::post('assign-school-to-student', 'assignSchoolToStudent')->name('assign-school-to-student');
+            Route::post('create-student', 'createStudentWithSchool')->name('create-student');
+            Route::post('bulk-import-students', 'bulkImportStudentsWithSchool')->name('bulk-import-students');
 
             Route::get('seller-list', 'seller_list')->name('seller-list');
             Route::get('pending-seller', 'pending_seller')->name('pending-seller');

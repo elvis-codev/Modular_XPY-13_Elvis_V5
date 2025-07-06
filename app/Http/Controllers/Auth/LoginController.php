@@ -97,7 +97,7 @@ class LoginController extends Controller
                             if($user->is_seller == 1){
                                 return redirect()->route('instructor.dashboard')->with($notify_message);
                             }else{
-                                return redirect()->route('student.dashboard')->with($notify_message);
+                                return redirect()->route('student.enrolled-courses')->with($notify_message);
                             }
 
                         }

@@ -109,6 +109,7 @@ Route::group(['middleware' => [ 'HtmlSpecialchars', 'MaintenanceMode']], functio
         Route::group(['middleware' => 'auth:web'],function () {
 
             Route::get('/dashboard', function() { abort(404); })->name('dashboard');
+            Route::get('/enrolled-courses', [StudentProfileController::class, 'enrolled_courses'])->name('enrolled-courses');
 
             Route::get('/edit-profile', [StudentProfileController::class, 'edit_profile'])->name('edit-profile');
             Route::put('/update-profile', [StudentProfileController::class, 'update_profile'])->name('update-profile');

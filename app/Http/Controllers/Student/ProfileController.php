@@ -62,6 +62,28 @@ class ProfileController extends Controller
 
     }
 
+    public function enrolled_courses(){
+        $user = Auth::guard('web')->user();
+        
+        $enrollments = CourseEnrollmentList::with(['course', 'course_enrollment'])
+            ->whereHas('course_enrollment', function($query) use($user) {
+                $query->where('payment_status', 'success')->where('student_id', $user->id);
+            })
+            ->latest()
+            ->get();
+
+        // Get user's school information for dynamic logo
+        $user_school = null;
+        if ($user->school_id) {
+            $user_school = School::find($user->school_id);
+        }
+        
+        return view('student.enrolled_courses', [
+            'enrollments' => $enrollments,
+            'user_school' => $user_school,
+        ]);
+    }
+
     public function edit_profile(){
         $user = Auth::guard('web')->user();
 

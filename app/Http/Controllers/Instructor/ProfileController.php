@@ -122,9 +122,9 @@ class ProfileController extends Controller
 
         $user = Auth::guard('web')->user();
         $user->name = $request->name;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->gender = $request->gender;
+        $user->phone = $request->phone ?? 'N/A';
+        $user->address = $request->address ?? 'N/A';
+        $user->gender = $request->gender ?? 'Other';
         $user->save();
 
         if($request->file('image')){

@@ -580,7 +580,7 @@
   'Edit Course' => 'Editar Curso',
   'Thumbnail Image' => 'Imagen Miniatura',
   'SEO title' => 'Título SEO',
-  'Image & Video' => 'Imagen y Video',
+  'Image & Video' => 'Portada',
   'Content' => 'Contenido',
   'Submission' => 'Envío',
   'Create Course' => 'Crear Curso',
@@ -1032,5 +1032,21 @@
   'School ID is required' => 'El ID del colegio es requerido',
   'School not found' => 'Colegio no encontrado',
   'Cannot assign student to an inactive school' => 'No se puede asignar estudiante a un colegio inactivo',
+  
+  // Support Ticket Translations
+  'Create Ticket' => 'Crear Ticket',
+  'Ticket List' => 'Lista de Tickets',
+  'Ticket Details' => 'Detalles del Ticket',
+  'Message List' => 'Lista de Mensajes',
+  'Send Message' => 'Enviar Mensaje',
+  'Tickets Info' => 'Información del Ticket',
+  'Time' => 'Hora',
+  'Last Response' => 'Última Respuesta',
+  'Attachements' => 'Adjuntos',
+  'Click to download' => 'Haz clic para descargar',
+  'Close Now' => 'Cerrar Ahora',
+  'Close Confirmation' => 'Confirmación de Cierre',
+  'Are you realy want to close this ticket?' => '¿Realmente deseas cerrar este ticket?',
+  'Yes, Close' => 'Sí, Cerrar',
 );
  ?>

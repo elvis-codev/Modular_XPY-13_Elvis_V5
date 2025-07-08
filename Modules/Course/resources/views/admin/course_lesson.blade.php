@@ -169,12 +169,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-12" id="edit_video_duration_div">
-                                                <div class="crancy__item-form--group mg-top-form-20">
-                                                    <label class="crancy__item-label">{{ __('translate.Video Duration') }} ({{ __('translate.minute') }}) * </label>
-                                                    <input class="crancy__item-input" type="number" name="video_duration" id="edit_video_duration">
-                                                </div>
-                                            </div>
+                                            <input type="hidden" name="video_duration" id="edit_video_duration" value="1">
 
                                             <div class="col-12">
                                                 <div class="crancy__item-form--group mg-top-form-20">
@@ -346,12 +341,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12" id="add_video_duration_div">
-                        <div class="crancy__item-form--group mg-top-form-20">
-                            <label class="crancy__item-label">{{ __('translate.Video Duration') }} ({{ __('translate.minute') }}) * </label>
-                            <input class="crancy__item-input" type="number" name="video_duration" value="{{ old('video_duration') }}">
-                        </div>
-                    </div>
+                    <input type="hidden" name="video_duration" value="{{ old('video_duration') ?: '1' }}">
 
                     <div class="col-12">
                         <div class="crancy__item-form--group mg-top-form-20">

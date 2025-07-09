@@ -37,9 +37,9 @@
 
 					<!-- Logo -->
 					<div class="logo crancy-sidebar-padding pd-right-0">
-						<a class="crancy-logo" href="{{ route('instructor.dashboard') }}">
+						<div class="crancy-logo">
                             <img src="{{ asset($general_setting->logo) }}" alt="logo">
-						</a>
+						</div>
 						<div id="crancy__sicon" class="crancy__sicon close-icon">
 					<span>
 					<svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -224,7 +224,32 @@
 						validation_errors.forEach(error => toastr.error(error));
 					}
 					
-                    $('#dataTable').DataTable();
+                    $('#dataTable').DataTable({
+                        "language": {
+                            "decimal": "",
+                            "emptyTable": "No hay datos disponibles en la tabla",
+                            "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                            "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                            "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+                            "infoPostFix": "",
+                            "thousands": ",",
+                            "lengthMenu": "Mostrar _MENU_ entradas",
+                            "loadingRecords": "Cargando...",
+                            "processing": "Procesando...",
+                            "search": "Buscar:",
+                            "zeroRecords": "No se encontraron registros coincidentes",
+                            "paginate": {
+                                "first": "Primero",
+                                "last": "Último",
+                                "next": "Siguiente",
+                                "previous": "Anterior"
+                            },
+                            "aria": {
+                                "sortAscending": ": activar para ordenar la columna ascendente",
+                                "sortDescending": ": activar para ordenar la columna descendente"
+                            }
+                        }
+                    });
 
                     $(".switch_to_student").on("change", function(){
                         window.location = `{{ route('student.dashboard') }}`

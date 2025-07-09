@@ -36,6 +36,7 @@ Route::group(['middleware' => ['HtmlSpecialchars', 'MaintenanceMode']], function
 
     Route::get('courses', [FrontendCourseController::class, 'index'])->name('courses');
     Route::get('course/{slug}', [FrontendCourseController::class, 'show'])->name('course');
+    Route::get('course-details/{slug}', [FrontendCourseController::class, 'course_details'])->name('course-details');
 
     Route::get('instructors', [FrontendCourseController::class, 'instructors'])->name('instructors');
     Route::get('instructors/{slug}', [FrontendCourseController::class, 'instructor_show'])->name('instructor.profile');

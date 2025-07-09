@@ -1,10 +1,10 @@
 @extends('student.master_layout')
 @section('title')
-    <title>{{ __('My Profile') }}</title>
+    <title>{{ __('translate.My Profile') }}</title>
 @endsection
 @section('body-header')
-    <h3 class="crancy-header__title m-0">{{ __('Edit Profile') }}</h3>
-    <p class="crancy-header__text">{{ __('Dashboard') }} >> {{ __('Edit Profile') }}</p>
+    <h3 class="crancy-header__title m-0">{{ __('translate.Edit Profile') }}</h3>
+    <p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Edit Profile') }}</p>
 @endsection
 @section('body-content')
     <!-- crancy Dashboard -->
@@ -22,7 +22,7 @@
                                     <div class="col-12 mg-top-30">
                                         <!-- Product Card -->
                                         <div class="crancy-product-card">
-                                            <h4 class="crancy-product-card__title">{{ __('Basic Information') }}</h4>
+                                            <h4 class="crancy-product-card__title">{{ __('translate.Basic Information') }}</h4>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="crancy__item-form--group mg-top-25 w-100">
@@ -35,7 +35,7 @@
                                                                 <img id="view_img" src="{{ asset($general_setting->placeholder_image) }}">
                                                                 @endif
 
-                                                                <h4 class="crancy-image-video-upload__title">{{ __('Click here to') }} <span class="crancy-primary-color">{{ __('Choose File') }}</span> {{ __('and upload') }} </h4>
+                                                                <h4 class="crancy-image-video-upload__title">{{ __('translate.Click here to') }} <span class="crancy-primary-color">{{ __('translate.Choose File') }}</span> {{ __('translate.and upload') }} </h4>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -43,40 +43,40 @@
                                             </div>
 
                                             <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('Name') }} *</label>
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Name') }} *</label>
                                                 <input class="crancy__item-input" type="text" name="name" value="{{ html_decode($user->name) }}">
                                             </div>
 
 
                                             <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('Email') }} *</label>
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Email') }} *</label>
                                                 <input class="crancy__item-input" type="email" name="email" value="{{ html_decode($user->email) }}" readonly>
                                             </div>
 
 
-                                            <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('Phone') }} *</label>
+                                            <div class="crancy__item-form--group mg-top-25" style="display:none">
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Phone') }} *</label>
                                                 <input class="crancy__item-input" type="text" name="phone" value="{{ html_decode($user->phone) }}">
                                             </div>
 
-                                            <div class="crancy__item-form--group mg-top-form-20">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('Gender') }} * </label>
+                                            <div class="crancy__item-form--group mg-top-form-20" style="display:none">
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Gender') }} * </label>
                                                 <select class="form-select crancy__item-input" name="gender">
-                                                    <option value="">{{ __('Select') }}</option>
-                                                    <option {{ $user->gender == 'Male' ? 'selected' : '' }} value="Male">{{ __('Male') }}</option>
-                                                    <option {{ $user->gender == 'Female' ? 'selected' : '' }} value="Female">{{ __('Female') }}</option>
-                                                    <option {{ $user->gender == 'Others' ? 'selected' : '' }} value="Others">{{ __('Others') }}</option>
+                                                    <option value="">{{ __('translate.Select') }}</option>
+                                                    <option {{ $user->gender == 'Male' ? 'selected' : '' }} value="Male">{{ __('translate.Male') }}</option>
+                                                    <option {{ $user->gender == 'Female' ? 'selected' : '' }} value="Female">{{ __('translate.Female') }}</option>
+                                                    <option {{ $user->gender == 'Others' ? 'selected' : '' }} value="Others">{{ __('translate.Others') }}</option>
 
                                                 </select>
                                             </div>
 
-                                            <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('Address') }}</label>
+                                            <div class="crancy__item-form--group mg-top-25" style="display:none">
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Address') }}</label>
                                                 <input class="crancy__item-input" type="text" name="address" value="{{ html_decode($user->address) }}">
                                             </div>
 
 
-                                            <button class="crancy-btn mg-top-25" type="submit">{{ __('Update') }}</button>
+                                            <button class="crancy-btn mg-top-25" type="submit">{{ __('translate.Update') }}</button>
 
                                         </div>
                                         <!-- End Product Card -->

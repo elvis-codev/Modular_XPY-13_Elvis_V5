@@ -207,6 +207,24 @@ class CourseController extends Controller
         ]);
     }
 
+    public function course_details(Request $request, $slug){
+
+        $course = Course::where(['status' => 'enable', 'approved_by_admin' => 'approved', 'slug' => $request->slug])->firstOrFail();
+
+        $instructor = User::select('id', 'name', 'email', 'designation', 'username', 'image', 'qualification', 'experience')->findOrFail($course->user_id);
+
+        $course_modules = CourseModule::with('lessons')->where('course_id', $course->id)->orderBy('serial', 'asc')->where('status', 'enable')->get();
+
+        $breadcrumb_title = trans('translate.Course Details');
+
+        return view('course::course_details', [
+            'breadcrumb_title' => $breadcrumb_title,
+            'course' => $course,
+            'course_modules' => $course_modules,
+            'instructor' => $instructor,
+        ]);
+    }
+
 
     public function instructors(Request $request){
 

@@ -23,9 +23,9 @@ class EditStudentProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'address' => 'required|max:255',
-            'phone' => 'required|max:15',
-            'gender' => 'required|max:10',
+            'address' => 'nullable|max:255',
+            'phone' => 'nullable|max:15',
+            'gender' => 'nullable|max:10',
         ];
     }
 
@@ -34,8 +34,6 @@ class EditStudentProfileRequest extends FormRequest
     {
         return [
             'name.required' => trans('translate.Name is required'),
-            'address.required' => trans('translate.Address is required'),
-            'phone.required' => trans('translate.Address is required'),
         ];
     }
 }

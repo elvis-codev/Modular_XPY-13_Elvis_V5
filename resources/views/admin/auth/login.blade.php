@@ -51,8 +51,8 @@
 
 										@if ($has_super_admin)
 											<div class="crancy-wc__heading pd-btm-20">
-												<h3 class="crancy-wc__form-title crancy-wc__form-title__one m-0">{{ __('Login Here') }}</h3>
-												<p>{{ __('Welcome to Educve Admin Panel') }}</p>
+												<h3 class="crancy-wc__form-title crancy-wc__form-title__one m-0">Iniciar Sesión</h3>
+												<p>Bienvenido(a) al Panel de Administración</p>
 											</div>
 											<!-- Sign in Form -->
 											<form class="crancy-wc__form-main" action="{{ route('admin.store-login') }}" method="post">
@@ -62,7 +62,7 @@
 														<!-- Form Group -->
 														<div class="form-group">
 															<div class="form-group__input">
-																<input class="crancy-wc__form-input" type="email" name="email" placeholder="{{ __('Email') }}">
+																<input class="crancy-wc__form-input" type="email" name="email" placeholder="Correo Electrónico">
 															</div>
 														</div>
 													</div>
@@ -70,7 +70,7 @@
 														<!-- Form Group -->
 														<div class="form-group">
 															<div class="form-group__input">
-																<input class="crancy-wc__form-input" placeholder="{{ __('Password') }}" id="password-field" type="password" name="password">
+																<input class="crancy-wc__form-input" placeholder="Contraseña" id="password-field" type="password" name="password">
 																<span class="crancy-wc__toggle"><i class="fas fa-eye-slash" id="toggle-icon"></i></span>
 															</div>
 														</div>
@@ -80,7 +80,7 @@
 												<!-- Form Group -->
 												<div class="form-group mg-top-30">
 													<div class="crancy-wc__button">
-														<button class="ntfmax-wc__btn" type="submit">{{ __('Login Now') }}</button>
+														<button class="ntfmax-wc__btn" type="submit">Iniciar Sesión</button>
 													</div>
 												</div>
 
@@ -89,7 +89,7 @@
 										@else
 											<div class="crancy-wc__heading pd-btm-20">
 												<h3 class="crancy-wc__form-title crancy-wc__form-title__one m-0">{{ __('Create Admin Account') }}</h3>
-												<p>{{ __('Welcome to Educve Admin Panel') }}</p>
+												<p>Bienvenido al Panel de Administración de Educve</p>
 											</div>
 											<!-- Sign in Form -->
 											<form class="crancy-wc__form-main" action="{{ route('admin.store-register') }}" method="post">
@@ -111,7 +111,7 @@
 														<!-- Form Group -->
 														<div class="form-group">
 															<div class="form-group__input">
-																<input class="crancy-wc__form-input" type="email" name="email" placeholder="{{ __('Email') }}">
+																<input class="crancy-wc__form-input" type="email" name="email" placeholder="Correo Electrónico">
 															</div>
 														</div>
 													</div>
@@ -119,7 +119,7 @@
 														<!-- Form Group -->
 														<div class="form-group">
 															<div class="form-group__input">
-																<input class="crancy-wc__form-input" placeholder="{{ __('Password') }}" id="password-field" type="password" name="password">
+																<input class="crancy-wc__form-input" placeholder="Contraseña" id="password-field" type="password" name="password">
 																<span class="crancy-wc__toggle"><i class="fas fa-eye-slash" id="toggle-icon"></i></span>
 															</div>
 														</div>

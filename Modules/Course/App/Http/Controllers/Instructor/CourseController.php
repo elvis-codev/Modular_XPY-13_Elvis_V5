@@ -270,6 +270,36 @@ class CourseController extends Controller
     }
 
 
+    public function course_seo(Request $request, $course_id){
+
+        $course = Course::findOrFail($course_id);
+
+        return view('course::instructor.course_seo', [
+            'course' => $course
+        ]);
+
+    }
+
+    public function course_seo_update(Request $request, $course_id){
+
+        $course = Course::findOrFail($course_id);
+
+        $course->seo_title = $request->seo_title;
+        $course->seo_description = $request->seo_description;
+        $course->save();
+
+
+        $notify_message= trans('translate.Updated Successfully');
+        $notify_message=array('message'=>$notify_message,'alert-type'=>'success');
+
+
+        if($request->req_type && $request->req_type == 'from_create'){
+            return redirect()->route('instructor.submit-for-review', ['course_id' => $course->id, 'req_type' => 'from_create'] )->with($notify_message);
+        }
+
+        return redirect()->back()->with($notify_message);
+
+    }
 
 
 

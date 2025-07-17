@@ -99,6 +99,8 @@ Route::group(['middleware' => ['HtmlSpecialchars', 'MaintenanceMode']], function
         Route::get('course-media/{course_id}', [InstructorCourseController::class, 'course_media'])->name('course-media');
         Route::post('course-media-update/{course_id}', [InstructorCourseController::class, 'course_media_update'])->name('course-media-update');
 
+        Route::get('course-seo/{course_id}', [InstructorCourseController::class, 'course_seo'])->name('course-seo');
+        Route::post('course-seo-update/{course_id}', [InstructorCourseController::class, 'course_seo_update'])->name('course-seo-update');
 
         Route::get('active-course', [InstructorCourseController::class, 'active_course'])->name('active-course');
         Route::get('draft-course', [InstructorCourseController::class, 'draft_course'])->name('draft-course');
@@ -135,6 +137,8 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin
     Route::get('course-media/{course_id}', [CourseController::class, 'course_media'])->name('course-media');
     Route::post('course-media-update/{course_id}', [CourseController::class, 'course_media_update'])->name('course-media-update');
 
+    Route::get('course-seo/{course_id}', [CourseController::class, 'course_seo'])->name('course-seo');
+    Route::post('course-seo-update/{course_id}', [CourseController::class, 'course_seo_update'])->name('course-seo-update');
 
     Route::get('active-course', [CourseController::class, 'active_course'])->name('active-course');
     Route::get('pending-course', [CourseController::class, 'pending_course'])->name('pending-course');

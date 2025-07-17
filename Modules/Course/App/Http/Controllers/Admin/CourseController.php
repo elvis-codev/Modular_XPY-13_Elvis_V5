@@ -264,6 +264,30 @@ class CourseController extends Controller
 
 
 
+    public function course_seo(Request $request, $course_id){
+
+        $course = Course::findOrFail($course_id);
+
+        return view('course::admin.course_seo', [
+            'course' => $course
+        ]);
+
+    }
+
+    public function course_seo_update(Request $request, $course_id){
+
+        $course = Course::findOrFail($course_id);
+
+        $course->seo_title = $request->seo_title;
+        $course->seo_description = $request->seo_description;
+        $course->save();
+
+
+        $notify_message= trans('translate.Updated Successfully');
+        $notify_message=array('message'=>$notify_message,'alert-type'=>'success');
+        return redirect()->back()->with($notify_message);
+
+    }
 
 
     public function submit_for_review(Request $request, $course_id){

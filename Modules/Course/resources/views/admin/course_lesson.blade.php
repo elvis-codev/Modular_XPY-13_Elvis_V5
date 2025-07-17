@@ -231,13 +231,9 @@
 
                                             <a class="crancy-btn next-btn mg-top-25" href="{{ route('admin.course-curriculum', ['course_id' => $course->id, 'req_type' => 'from_create'] ) }}">  {{ __('translate.Previous') }}</a>
 
-                                            <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('admin.course-seo', ['course_id' => $course->id, 'req_type' => 'from_create']) }}">  {{ __('translate.Next') }}</a>
-
                                         @else
 
                                             <a class="crancy-btn next-btn mg-top-25" href="{{ route('admin.course-curriculum', $course->id ) }}"> {{ __('translate.Previous') }}</a>
-
-                                            <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('admin.course-seo', $course->id ) }}">  {{ __('translate.Next') }} </a>
 
                                         @endif
                                     </div>
@@ -589,16 +585,12 @@
             };
 
             function toggleEditForm(lessonId) {
-                console.log('toggleEditForm called with lessonId:', lessonId);
-                
                 var lesson = lessonData[lessonId];
                 if (!lesson) {
                     console.error('Lesson not found:', lessonId);
                     alert('Lesson data not found');
                     return;
                 }
-
-                console.log('Found lesson:', lesson);
 
                 // Show the form
                 $('#inlineEditForm').show();
@@ -623,7 +615,8 @@
                 }
                 
                 // Set form action
-                $('#editLessonForm').attr('action', '{{ url("admin/update-course-lesson") }}/' + lesson.course_module_id + '/' + lesson.id);
+                var actionUrl = '{{ url("admin/update-course-lesson") }}/' + lesson.course_module_id + '/' + lesson.id;
+                $('#editLessonForm').attr('action', actionUrl);
 
                 // Initialize TinyMCE for inline form
                 tinymce.remove('.inline-summernote');
@@ -709,25 +702,6 @@
             };
         })(jQuery);
 
-        // Simple test function
-        function toggleEditForm(lessonId) {
-            console.log('toggleEditForm called with lessonId:', lessonId);
-            
-            // First just try to show the form
-            $('#inlineEditForm').show();
-            
-            // Scroll to form
-            $('html, body').animate({
-                scrollTop: $('#inlineEditForm').offset().top - 100
-            }, 500);
-            
-            alert('Edit form should be visible now for lesson ID: ' + lessonId);
-        }
-
-        function cancelEdit() {
-            $('#inlineEditForm').hide();
-            tinymce.remove('.inline-summernote');
-        }
 
         function itemDeleteConfrimation(course_module_id, module_lesson_id){
 
@@ -740,26 +714,27 @@
             const videoSourceDiv = document.getElementById('edit_video_source_div');
             const videoLinkDiv = document.getElementById('edit_video_link_div');
             const embedUrlDiv = document.getElementById('edit_embed_url_div');
-            const videoDurationDiv = document.getElementById('edit_video_duration_div');
 
             if (contentType === 'video') {
-                videoSourceDiv.style.display = 'block';
-                videoLinkDiv.style.display = 'block';
-                embedUrlDiv.style.display = 'none';
-                videoDurationDiv.style.display = 'block';
+                if (videoSourceDiv) videoSourceDiv.style.display = 'block';
+                if (videoLinkDiv) videoLinkDiv.style.display = 'block';
+                if (embedUrlDiv) embedUrlDiv.style.display = 'none';
                 
                 // Clear embed URL field
-                document.getElementById('edit_embed_url').value = '';
+                const embedUrlInput = document.getElementById('edit_embed_url');
+                if (embedUrlInput) embedUrlInput.value = '';
             } else {
-                videoSourceDiv.style.display = 'none';
-                videoLinkDiv.style.display = 'none';
-                embedUrlDiv.style.display = 'block';
-                videoDurationDiv.style.display = 'none';
+                if (videoSourceDiv) videoSourceDiv.style.display = 'none';
+                if (videoLinkDiv) videoLinkDiv.style.display = 'none';
+                if (embedUrlDiv) embedUrlDiv.style.display = 'block';
                 
                 // Clear video fields
-                document.getElementById('edit_video_id').value = '';
+                const videoIdInput = document.getElementById('edit_video_id');
+                if (videoIdInput) videoIdInput.value = '';
+                
                 // Set duration to 0 for links
-                document.getElementById('edit_video_duration').value = '0';
+                const durationInput = document.getElementById('edit_video_duration');
+                if (durationInput) durationInput.value = '0';
             }
         }
 

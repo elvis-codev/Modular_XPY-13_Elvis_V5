@@ -132,13 +132,13 @@
 
                                             <a class="crancy-btn next-btn mg-top-25" href="{{ route('instructor.course-curriculum', ['course_id' => $course->id, 'req_type' => 'from_create'] ) }}">  {{ __('translate.Previous') }}</a>
 
-                                            <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('instructor.course-seo', ['course_id' => $course->id, 'req_type' => 'from_create']) }}">  {{ __('translate.Next') }}</a>
+                                            <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('instructor.submit-for-review', ['course_id' => $course->id, 'req_type' => 'from_create']) }}">  {{ __('translate.Next') }}</a>
 
                                         @else
 
                                             <a class="crancy-btn next-btn mg-top-25" href="{{ route('instructor.course-curriculum', $course->id ) }}"> {{ __('translate.Previous') }}</a>
 
-                                            <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('instructor.course-seo', $course->id ) }}">  {{ __('translate.Next') }} </a>
+                                            <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('instructor.submit-for-review', $course->id ) }}">  {{ __('translate.Next') }} </a>
 
                                         @endif
                                     </div>

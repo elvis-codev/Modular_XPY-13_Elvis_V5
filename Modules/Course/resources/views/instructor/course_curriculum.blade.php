@@ -144,13 +144,13 @@
 
                                                 <a class="crancy-btn  next-btn mg-top-25" href="{{ route('instructor.course-media', ['course_id' => $course->id, 'req_type' => 'from_create'] ) }}">  {{ __('translate.Previous') }}</a>
 
-                                                <a class="crancy-btn edc-crs-step-save-btn  next-btn p mg-top-25" href="{{ $course_modules->count() > 0 ? route('instructor.course-lesson', ['course_id' => $course->id, 'course_module' => $course_modules->first()->id, 'req_type' => 'from_create']) : '#' }}">  {{ __('translate.Next') }}</a>
+                                                <a class="crancy-btn edc-crs-step-save-btn  next-btn p mg-top-25" href="{{ route('instructor.course-seo', ['course_id' => $course->id, 'req_type' => 'from_create']) }}">  {{ __('translate.Next') }}</a>
 
                                             @else
 
                                                 <a class="crancy-btn  next-btn mg-top-25" href="{{ route('instructor.course-media', $course->id ) }}">  {{ __('translate.Previous') }}</a>
 
-                                                <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ $course_modules->count() > 0 ? route('instructor.course-lesson', ['course_id' => $course->id, 'course_module' => $course_modules->first()->id]) : '#' }}">  {{ __('translate.Next') }}</a>
+                                                <a class="crancy-btn edc-crs-step-save-btn next-btn mg-top-25" href="{{ route('instructor.course-seo', $course->id ) }}">  {{ __('translate.Next') }}</a>
 
                                             @endif
                                         </div>

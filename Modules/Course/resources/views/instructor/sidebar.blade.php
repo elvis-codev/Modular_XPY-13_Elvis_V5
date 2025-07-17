@@ -1,7 +1,7 @@
 
 
 
-<li class="{{ Route::is('instructor.courses.*') || Route::is('instructor.course-curriculum') || Route::is('instructor.course-lesson') || Route::is('instructor.course-media') || Route::is('instructor.submit-for-review') || Route::is('instructor.draft-course') || Route::is('instructor.pending-course') || Route::is('instructor.rejected-course') || Route::is('instructor.active-course')  ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__course_list"><span class="menu-bar__text">
+<li class="{{ Route::is('instructor.courses.*') || Route::is('instructor.course-curriculum') || Route::is('instructor.course-lesson') || Route::is('instructor.course-media') || Route::is('instructor.submit-for-review') || Route::is('instructor.draft-course') || Route::is('instructor.pending-course') || Route::is('instructor.rejected-course') || Route::is('instructor.active-course') || Route::is('instructor.course-seo') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__course_list"><span class="menu-bar__text">
     <span class="crancy-menu-icon crancy-svg-icon__v1">
    <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M7.00001 3H5.00016C3.8956 3 3.00017 3.89542 3.00016 4.99998L3.00003 19C3.00002 20.1046 3.89545 21 5.00003 21H18C19.1046 21 20 20.1046 20 19V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -12,7 +12,7 @@
 
     <span class="menu-bar__name">{{ __('translate.Manage Course') }}</span></span> <span class="crancy__toggle"></span></a></span>
     <!-- Dropdown Menu -->
-    <div class="collapse crancy__dropdown {{ Route::is('instructor.courses.*') || Route::is('instructor.course-curriculum') || Route::is('instructor.course-lesson') || Route::is('instructor.course-media') || Route::is('instructor.submit-for-review') || Route::is('instructor.draft-course') || Route::is('instructor.pending-course') || Route::is('instructor.rejected-course') || Route::is('instructor.active-course')  ? 'show' : '' }}" id="menu-item__course_list"  data-bs-parent="#CrancyMenu">
+    <div class="collapse crancy__dropdown {{ Route::is('instructor.courses.*') || Route::is('instructor.course-curriculum') || Route::is('instructor.course-lesson') || Route::is('instructor.course-media') || Route::is('instructor.submit-for-review') || Route::is('instructor.draft-course') || Route::is('instructor.pending-course') || Route::is('instructor.rejected-course') || Route::is('instructor.active-course') || Route::is('instructor.course-seo') ? 'show' : '' }}" id="menu-item__course_list"  data-bs-parent="#CrancyMenu">
         <ul class="menu-bar__one-dropdown">
 
             <li><a href="{{ route('instructor.courses.create') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Create Course') }}</span></span></a></li>
